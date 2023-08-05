@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenAI Jokes Generator</title>
+  </head>
+  <body>
+    <h1>Generated Joke:</h1>
+    <p>{{ response }}</p>
+    <br>
+    <a href="/home">Generate another joke</a>
+    <form method="get" action="{{ url_for('first') }}">
+        <input type="submit" value="Exit">
+    </form>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+</head>
+<body>
+    <h1>Signup Page</h1>
+    <form method="POST" action="{{ url_for('signup') }}">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <label for="age">Age:</label><br>
+        <input type="text" id="age" name="age"><br><br>
+        <label for="gender">Gender:</label><br>
+        <input type="text" id="gender" name="gender"><br><br>
+        <label for="country">Country:</label><br>
+        <input type="text" id="country" name="country"><br><br>
+        <label for="Fav_Comedian">Favourite Comedian: (optional)</label><br>
+        <input type="text" id="fav_comedian" name="fav_comedian"><br><br>
+        <label for="personality">MBTI Personality (optional):</label><br>
+        <input type="text" id="personality" name="personality"><br><br>
+        <input type="submit" value="Signup">
+    </form>
+    <br>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+</body>
+</html>
