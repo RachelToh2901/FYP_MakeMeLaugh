@@ -1,9 +1,9 @@
 import sqlite3
 
 db_user = "database.db"
-conn = sqlite3.connect(db_user)
 
 def create_table():
+    conn = sqlite3.connect(db_user)
     c = conn.cursor()
     c.execute(
         """CREATE TABLE IF NOT EXISTS users
@@ -20,12 +20,14 @@ def create_table():
     conn.close()
 
 def delete_table():
+    conn = sqlite3.connect(db_user)
     cursor = conn.cursor()
     cursor.execute("DROP TABLE IF EXISTS users")
     conn.commit()
     conn.close()
 
 def create_user(username, password, age, gender, country, fav_comedian=None, personality=None):
+    conn = sqlite3.connect(db_user)
     c = conn.cursor()
     c.execute(
         # "INSERT INTO users (username, password, age, gender, country, fav_comedian) VALUES (?, ?, ?, ?, ?, ?)",
@@ -37,6 +39,7 @@ def create_user(username, password, age, gender, country, fav_comedian=None, per
     conn.close()
 
 def login_user(username, password):
+    conn = sqlite3.connect(db_user)
     c = conn.cursor()
     c.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
     result = c.fetchone()
@@ -44,6 +47,7 @@ def login_user(username, password):
     return result is not None
 
 def get_user_info_by_username(username):
+    conn = sqlite3.connect(db_user)
     c = conn.cursor()
     c.execute("SELECT * FROM users WHERE username=?", (username,))
     result = c.fetchone()
@@ -51,6 +55,7 @@ def get_user_info_by_username(username):
     return result 
 
 def get_all_user():
+    conn = sqlite3.connect(db_user)
     c = conn.cursor()
     c.execute("SELECT * FROM users")
     users = c.fetchall()
@@ -58,12 +63,14 @@ def get_all_user():
     return users
 
 def delete_user_by_username(username):
+    conn = sqlite3.connect(db_user)
     c = conn.cursor()
     c.execute("DELETE FROM users WHERE username <> 'admin' AND username=?", (username,))
     conn.commit()
     conn.close()
 
 def delete_all_users():
+    conn = sqlite3.connect(db_user)
     c = conn.cursor()
     c.execute("DELETE FROM users WHERE username <> 'admin'")
     conn.commit()
