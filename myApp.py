@@ -82,9 +82,9 @@ def result():
     _, _ , age, gender, race, country, fav_comedian = db_user.get_user_info_by_username(username)
     keyword = request.form['keyword']
     if fav_comedian is None:
-        prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who is {race} and stays in {country}"
+        prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
     else:
-        prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who is {race} and stays in {country} using {fav_comedian} style"
+        prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who stays in {country} using {fav_comedian} style"
     result = chatgpt(prompt)
     return render_template('result.html', response=result)
 
