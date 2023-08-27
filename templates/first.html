@@ -2,10 +2,110 @@
 <html>
   <head>
     <title>Login or Signup</title>
+
+    <style>
+      body {
+        background-color:yellow;
+        background-image: linear-gradient(to bottom, rgb(252, 0, 0), yellow);
+      }
+      .center-box  {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 714px;
+        margin-top: 25px;
+      }
+      .box {
+        width: 1000px;
+        height: 655px;
+        border: none;
+        background-color:white;
+        border-radius: 20px;
+      }
+      h1 {
+        color: rgb(255, 81, 0);
+        text-align: center;
+        font-size: 67px;
+        font-family:cursive;
+        margin: 0;
+      }
+      h2 {
+        color: darkorange;
+        text-align: center;
+        font-size: 50px;
+        font-family:cursive;
+        margin: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 100px;
+        margin-top: 100px;
+      }
+      .button-container {
+        display: flex;
+        gap: 150px;
+      }
+      .button {
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        transition-duration: 0.6s;
+        cursor: pointer;
+      }
+
+      .button1 {
+        background-color: white;
+        background-image: linear-gradient(darkorange, yellow);
+        color: black; 
+        border: 0px;
+        font-size: 24px;
+        font-weight:bold;
+        border-radius: 6px;
+        padding: 10px 110px;
+      }
+
+      .button1:hover {
+        background-color: #f6c468;
+        background-image: none;
+        color: white;
+      }
+
+      .button2 {
+        background-color: white; 
+        background-image: linear-gradient(darkorange, yellow);
+        color: black; 
+        border: 0px;
+        font-size: 24px;
+        font-weight:bold;
+        border-radius: 6px;
+        padding: 10px 102px;
+      }
+
+      .button2:hover {
+        background-color: #f6c468;
+        background-image: none;
+        color: white;
+      }
+    </style>
   </head>
   <body>
-    <h1>Welcome to Joke Generator App</h1>
-    <button onclick="window.location.href='/login'">Login</button>
-    <button onclick="window.location.href='/signup'">Signup</button>
+    <div class = "center-box">
+      <div class = "box">
+        <div class="container">
+          <h1>Make Me Laugh</h1>
+          <h2>Welcome to Joke Generator World</h2>
+          <div class = "button-container">
+            <button class="login button1" onclick="window.location.href='/login'">Login</button>
+            <button class="signup button2" onclick="window.location.href='/signup'">Signup</button>
+          </div>     
+        </div>
+      </div>
+    </div>
   </body>
 </html>
