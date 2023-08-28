@@ -4,6 +4,7 @@ import os
 from chatgpt import chatgpt
 import db_user 
 import db_joke
+import bert_model
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
@@ -25,7 +26,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         session["username"] = username
-        if username == 'admin' and password == 'admin':
+        if username == 'admin' and db_user.login_user(username, password):
             return redirect("/admin_options")
         elif db_user.login_user(username, password):
             return redirect("/home")
@@ -85,7 +86,13 @@ def result():
         prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who is {race} and stays in {country}"
     else:
         prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who is {race} and stays in {country} using {fav_comedian} style"
-    result = chatgpt(prompt)
+    results = chatgpt(prompt)
+    bert_rating = [None]*5
+    for i in range(len(results)):
+        bert_rating[i] = bert_model.bert_rating(results[i])
+    sorted(zip(bert_rating, results), reverse=True)[:3]
+    
+        
     return render_template('result.html', response=result)
 
 

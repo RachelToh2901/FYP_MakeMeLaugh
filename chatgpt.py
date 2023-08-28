@@ -25,7 +25,11 @@ def chatgpt(user_input):
     return results
 
 if __name__ == "__main__":
-    prompt = "give me 5 jokes about school for a 21 years old girl who is chinese and stays in Malaysia"
+    import time 
+    start = time.time()
+    prompt = "give me 5 joke about school for a 21 years old girl who is chinese and stays in Malaysia"
     output = chatgpt(prompt)
+    end = time.time()
     print(output)
+    print(end - start)
     print(len(output))
