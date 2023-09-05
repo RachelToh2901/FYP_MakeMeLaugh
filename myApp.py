@@ -83,7 +83,7 @@ def result():
     _, _ , age, gender, race, country, fav_comedian = db_user.get_user_info_by_username(username)
     keyword = request.form['keyword']
     if fav_comedian is None:
-        prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who is {race} and stays in {country}"
+        prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
     else:
         prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who is {race} and stays in {country} using {fav_comedian} style"
     results = chatgpt(prompt)
@@ -92,7 +92,21 @@ def result():
         bert_rating[i] = bert_model.bert_rating(results[i])
     sorted(zip(bert_rating, results), reverse=True)[:3]
     
-        
+    result = chatgpt(prompt)
+
+    if request.method == "POST":
+        if request.form.get['submit_button']:
+            print('submit')
+            for joke_index, joke in enumerate(result, start=1):
+                funny_rating = int(request.form.get(f'rate_{joke_index}'))
+                offensive_rating = int(request.form.get(f'rate_offensive{joke_index}'))
+                surprise_rating = int(request.form.get(f'rate_surprise{joke_index}'))
+                
+                print(joke)
+                print(funny_rating)
+                print(offensive_rating)
+                print(surprise_rating)
+
     return render_template('result.html', response=result)
 
 

@@ -3,27 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
+
+    <style>
+        body {
+          background-color:rgb(255, 242, 0);
+        }
+        h1 {
+          color: rgb(255, 81, 0);
+          text-align: center;
+          font-size: 35px;
+          font-family:cursive;
+          margin: 0;
+        }
+        .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 960px;
+        }
+        .center-form {
+          width:500px;
+          height: 880px;
+          border: none;
+          background-color:white;
+          border-radius: 20px;
+          padding: 30px;
+        }
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: left;
+          text-align: left;
+        }
+        input.right {
+          float: right;
+        }
+        input {
+            font-size:18px;
+            font-family:cursive;
+        }
+        label {
+            font-size:18px;
+            color: rgb(255, 140, 0);
+            font-family:cursive;
+        }
+        input[type=submit] {
+          text-decoration: none;
+          margin: 4px 2px;
+          background-image: linear-gradient(darkorange, yellow);
+          color: white; 
+          border: 0px;
+          font-size: 18px;
+          font-weight:bold;
+          border-radius: 6px;
+          padding: 10px 25px;
+          cursor: pointer;
+        }
+        input[type=submit]:hover {
+          background-color: #f6c468;
+          background-image: none;
+          color: black;
+        }
+    </style>
 </head>
 <body>
     <h1>Signup Page</h1>
-    <form method="POST" action="{{ url_for('signup') }}">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
-        <label for="age">Age:</label><br>
-        <input type="text" id="age" name="age"><br><br>
-        <label for="gender">Gender:</label><br>
-        <input type="text" id="gender" name="gender"><br><br>
-        <label for="country">Country:</label><br>
-        <input type="text" id="country" name="country"><br><br>
-        <label for="Fav_Comedian">Favourite Comedian: (optional)</label><br>
-        <input type="text" id="fav_comedian" name="fav_comedian"><br><br>
-        <label for="personality">MBTI Personality (optional):</label><br>
-        <input type="text" id="personality" name="personality"><br><br>
-        <input type="submit" value="Signup">
-    </form>
-    <br>
-    <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    <div class="center-container">
+        <div class="center-form">
+          <form method="POST" action="{{ url_for('signup') }}">
+            <div class="container">
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username"><br><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password"><br><br>
+                <label for="age">Age:</label><br>
+                <input type="text" id="age" name="age"><br><br>
+                <label for="gender">Gender:</label><br>
+                <input type="text" id="gender" name="gender"><br><br>
+                <label for="country">Country:</label><br>
+                <input type="text" id="country" name="country"><br><br>
+                <label for="Fav_Comedian">Favourite Comedian: (optional)</label><br>
+                <input type="text" id="fav_comedian" name="fav_comedian"><br><br>
+                <label for="personality">MBTI Personality (optional):</label><br>
+                <input type="text" id="personality" name="personality"><br><br>
+                <input type="submit" value="Signup">
+                <br>
+                <p style="color:rgb(255, 140, 0);font-family:cursive;">Already have an account? <a href="{{ url_for('login') }}" style="color:rgb(255, 140, 0);font-family:cursive;">Login</a></p>
+            </div>
+          </form>
+        </div>
+    </div>
 </body>
 </html>
