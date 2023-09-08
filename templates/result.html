@@ -199,67 +199,82 @@
         background: white;
       }
     </style>
+
+    <script>
+      function updateRatings(jokeIndex) {
+          var funnyRating = document.querySelector(`input[name=rate_${jokeIndex}]:checked`).value;
+          var offensiveRating = document.querySelector(`input[name=rate_offensive${jokeIndex}]:checked`).value;
+          var surpriseRating = document.querySelector(`input[name=rate_surprise${jokeIndex}]:checked`).value;
+      
+          document.getElementById(`funny_rating_${jokeIndex}`).value = funnyRating;
+          document.getElementById(`offensive_rating_${jokeIndex}`).value = offensiveRating;
+          document.getElementById(`surprise_rating_${jokeIndex}`).value = surpriseRating;
+      }
+    </script>
   </head>
   <body>
     <h1>Jokes For You</h1>
     <div class="center-container">
       <div class="center-form">
-        <div class="container">
-          {% for joke in response %}
-          <p style="color:black;font-size: 20px;">{{ loop.index }}. {{ joke }}</p>
-          <div class="rate">
-            <p>Funny:</p>
-            <input type="radio" id="star5_{{ loop.index }}" name="rate_{{ loop.index }}" value="5" />
-            <label for="star5_{{ loop.index }}" title="5 stars">5 stars</label>
-            <input type="radio" id="star4_{{ loop.index }}" name="rate_{{ loop.index }}" value="4" />
-            <label for="star4_{{ loop.index }}" title="4 stars">4 stars</label>
-            <input type="radio" id="star3_{{ loop.index }}" name="rate_{{ loop.index }}" value="3" />
-            <label for="star3_{{ loop.index }}" title="3 stars">3 stars</label>
-            <input type="radio" id="star2_{{ loop.index }}" name="rate_{{ loop.index }}" value="2" />
-            <label for="star2_{{ loop.index }}" title="2 stars">2 stars</label>
-            <input type="radio" id="star1_{{ loop.index }}" name="rate_{{ loop.index }}" value="1" />
-            <label for="star1_{{ loop.index }}" title="1 star">1 star</label>
+        <form method="POST" action="{{ url_for('result') }}">
+          <div class="container">
+            {% for joke in response %}
+            <p style="color:black;font-size: 20px;">{{ loop.index }}. {{ joke }}</p>
+            <div class="rate">
+              <p>Funny:</p>
+              <input type="radio" id="star5_{{ loop.index }}" name="rate_{{ loop.index }}" value="5" />
+              <label for="star5_{{ loop.index }}" title="5 stars">5 stars</label>
+              <input type="radio" id="star4_{{ loop.index }}" name="rate_{{ loop.index }}" value="4" />
+              <label for="star4_{{ loop.index }}" title="4 stars">4 stars</label>
+              <input type="radio" id="star3_{{ loop.index }}" name="rate_{{ loop.index }}" value="3" />
+              <label for="star3_{{ loop.index }}" title="3 stars">3 stars</label>
+              <input type="radio" id="star2_{{ loop.index }}" name="rate_{{ loop.index }}" value="2" />
+              <label for="star2_{{ loop.index }}" title="2 stars">2 stars</label>
+              <input type="radio" id="star1_{{ loop.index }}" name="rate_{{ loop.index }}" value="1" />
+              <label for="star1_{{ loop.index }}" title="1 star">1 star</label>
+            </div>
+            <div class="rate">  
+              <p>Offensive:</p>
+              <input type="radio" id="star5_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="5" />
+              <label for="star5_offensive{{ loop.index }}" title="5 stars">5 stars</label>
+              <input type="radio" id="star4_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="4" />
+              <label for="star4_offensive{{ loop.index }}" title="4 stars">4 stars</label>
+              <input type="radio" id="star3_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="3" />
+              <label for="star3_offensive{{ loop.index }}" title="3 stars">3 stars</label>
+              <input type="radio" id="star2_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="2" />
+              <label for="star2_offensive{{ loop.index }}" title="2 stars">2 stars</label>
+              <input type="radio" id="star1_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="1" />
+              <label for="star1_offensive{{ loop.index }}" title="1 star">1 star</label>
+            </div>
+            <div class="rate">  
+              <p>Surprise:</p>
+              <input type="radio" id="star5_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="5" />
+              <label for="star5_surprise{{ loop.index }}" title="5 stars">5 stars</label>
+              <input type="radio" id="star4_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="4" />
+              <label for="star4_surprise{{ loop.index }}" title="4 stars">4 stars</label>
+              <input type="radio" id="star3_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="3" />
+              <label for="star3_surprise{{ loop.index }}" title="3 stars">3 stars</label>
+              <input type="radio" id="star2_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="2" />
+              <label for="star2_surprise{{ loop.index }}" title="2 stars">2 stars</label>
+              <input type="radio" id="star1_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="1" />
+              <label for="star1_surprise{{ loop.index }}" title="1 star">1 star</label>
+            </div>
+            <p>Reality Representative:</p>
+            <label class="container2">Yes
+              <input type="radio" checked="checked" name="radio{{ loop.index }}">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container2">No
+              <input type="radio" name="radio{{ loop.index }}">
+              <span class="checkmark"></span>
+            </label>
+            <input style = "font-size: 18px; width:max-content;" type="submit" name="submit_button" value="Submit">
+            {% endfor %}
+            <br>
+            <button class="button1" onclick="window.location.href='/home'">Generate another joke</button>
           </div>
-          <div class="rate">  
-            <p>Offensive:</p>
-            <input type="radio" id="star5_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="5" />
-            <label for="star5_offensive{{ loop.index }}" title="5 stars">5 stars</label>
-            <input type="radio" id="star4_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="4" />
-            <label for="star4_offensive{{ loop.index }}" title="4 stars">4 stars</label>
-            <input type="radio" id="star3_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="3" />
-            <label for="star3_offensive{{ loop.index }}" title="3 stars">3 stars</label>
-            <input type="radio" id="star2_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="2" />
-            <label for="star2_offensive{{ loop.index }}" title="2 stars">2 stars</label>
-            <input type="radio" id="star1_offensive{{ loop.index }}" name="rate_offensive{{ loop.index }}" value="1" />
-            <label for="star1_offensive{{ loop.index }}" title="1 star">1 star</label>
-          </div>
-          <div class="rate">  
-            <p>Surprise:</p>
-            <input type="radio" id="star5_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="5" />
-            <label for="star5_surprise{{ loop.index }}" title="5 stars">5 stars</label>
-            <input type="radio" id="star4_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="4" />
-            <label for="star4_surprise{{ loop.index }}" title="4 stars">4 stars</label>
-            <input type="radio" id="star3_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="3" />
-            <label for="star3_surprise{{ loop.index }}" title="3 stars">3 stars</label>
-            <input type="radio" id="star2_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="2" />
-            <label for="star2_surprise{{ loop.index }}" title="2 stars">2 stars</label>
-            <input type="radio" id="star1_surprise{{ loop.index }}" name="rate_surprise{{ loop.index }}" value="1" />
-            <label for="star1_surprise{{ loop.index }}" title="1 star">1 star</label>
-          </div>
-          <p>Reality Representative:</p>
-          <label class="container2">Yes
-            <input type="radio" checked="checked" name="radio{{ loop.index }}">
-            <span class="checkmark"></span>
-          </label>
-          <label class="container2">No
-            <input type="radio" name="radio{{ loop.index }}">
-            <span class="checkmark"></span>
-          </label>
-          <input style = "font-size: 18px; width:max-content;" type="submit" value="Submit">
-          {% endfor %}
-          <br>
-          <button class="button1" onclick="window.location.href='/home'">Generate another joke</button>
-        </div>
+        </form>
+        
         <form method="get" action="{{ url_for('first') }}">
           <div class="container">
             <input type="submit" value="Exit">
