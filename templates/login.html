@@ -46,13 +46,15 @@
         align-items: left;
         text-align: left;
         gap: 15px;
+        margin-top: 25px;
       }
       input.right {
         float: right;
       }
       input {
-          font-size:24px;
-          font-family:cursive;
+        font-size:15px;
+        border: 1px solid black;
+        padding: 5px 5px;
       }
       label {
           font-size:24px;
@@ -84,10 +86,10 @@
       <div class="center-form">
         <form method="POST" action="{{ url_for('login') }}">
           <div class="container">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password"><br><br>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br><br><br>
             <input type="submit" value="Login" class = "right">
             <br>
             <p style="color:rgb(255, 140, 0);font-family:cursive;">New user? <a href="{{ url_for('signup') }}" style="color:rgb(255, 140, 0);font-family:cursive;">Create an account</a></p>
