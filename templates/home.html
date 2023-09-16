@@ -51,8 +51,9 @@
         float: right;
       }
       input {
-          font-size:24px;
-          font-family:cursive;
+        font-size:15px;
+        border: 1px solid black;
+        padding: 5px 5px;
       }
       label {
           font-size:24px;
@@ -76,17 +77,71 @@
         background-image: none;
         color: black;
       }
+      :root {
+        --border-width: 7px;
+      }
+      .sec-loading {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.7);
+        z-index: 999; /* Ensures the loading symbol appears on top of everything */
+        display: none; /* Initially hide it */
+      }
+
+      .sec-loading .one {
+        height: 80px;
+        width: 80px;
+        border: var(--border-width) solid rgb(255, 140, 0);
+        transform: rotate(45deg);
+        border-radius: 0 50% 50% 50%;
+        position: relative;
+        animation: move 0.5s linear infinite alternate-reverse;
+      }
+      .sec-loading .one::before {
+        content: "";
+        position: absolute;
+        height: 55%;
+        width: 55%;
+        border-radius: 50%;
+        border: var(--border-width) solid transparent;
+        border-top-color: rgb(255, 140, 0);
+        border-bottom-color: rgb(255, 140, 0);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: rotate 1s linear infinite;
+      }
+
+      @keyframes rotate {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+      @keyframes move {
+        to {
+          transform: translateY(15px) rotate(45deg);
+        }
+      }
     </style>
   </head>
   <body>
     <h1>Make Me Laugh: Jokes Generator</h1>
     <div class="center-container">
       <div class="center-form">
-        <form action="{{ url_for('result') }}" method="POST">
+        <form id="jokeForm" action="{{ url_for('result') }}" method="POST">
           <div class="container">
             <label for="keyword">Enter your keyword:</label>
             <input type="text" id="keyword" name="keyword"><br><br><br><br>
-            <input type="submit" value="Generate joke">
+            <input type="submit" value="Generate joke" name= "generateBtn" id="generateBtn">
+            <div class="sec-loading">
+              <div class="one"></div>
+            </div>
           </div>
         </form>
         <br>
@@ -97,5 +152,14 @@
         </form>
       </div>
     </div>
+    <script>
+      // JavaScript to show loading symbol when the submit button is clicked
+      document.getElementById("jokeForm").addEventListener("submit", function (event) {
+        event.preventDefault();  // Prevent the default form submission  
+        document.getElementById("generateBtn").style.display = "transparent";
+        document.querySelector(".sec-loading").style.display = "flex";
+        this.submit();
+      });
+  </script>
   </body>
 </html>
