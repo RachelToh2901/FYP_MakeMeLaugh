@@ -60,7 +60,6 @@ def admin_options():
 def show_users():
     users = db_user.get_all_user()
     jokes = db_joke.get_all_jokes()
-    print(jokes)
     return render_template('database.html', users=users, jokes=jokes)
 
 @app.route('/delete_user', methods=['POST'])
@@ -89,26 +88,21 @@ def result():
     # _, _ , age, gender, country, fav_comedian = user_db.get_user_info_by_username(username)
     _, _ , age, gender, race, country, fav_comedian = db_user.get_user_info_by_username(username)
     keyword = request.form.get('keyword', 'None')
-    print("keyword:", keyword)
 
     if fav_comedian is None:
         prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
     else:
         prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who is {race} and stays in {country} using {fav_comedian} style"
     results = chatgpt(prompt)
-    print("chat: ", keyword)
     bert_rating = [None]*5
     for i in range(len(results)):
         bert_rating[i] = bert_model.bert_rating(results[i])
     sorted(zip(bert_rating, results), reverse=True)[:3]
-    print("hello", keyword)
 
     result = chatgpt(prompt)
-    print(result)
     BERT_rating = 2
 
     if 'submit_button' in request.form:
-        print("keyword2.....", keyword)
         # Get the username from the session
         if not username:
             flash('User not logged in.')
@@ -124,7 +118,6 @@ def result():
             reality_rep_value = request.form.get(f'radio{i}', 'Yes')  # Default to 'Yes' if not provided
             # Set reality_rep_rating to 0 if the value is 'No'
             reality_rep_rating = 0 if reality_rep_value == 'No' else 1
-            print("reality: ", reality_rep_rating, "\n")
 
             # Insert the ratings into your database
             db_joke.insert_joke(joke, keyword, BERT_rating, funny_rating, offensive_rating, surprise_rating, reality_rep_rating, username)
