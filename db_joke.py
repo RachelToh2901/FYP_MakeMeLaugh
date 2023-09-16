@@ -66,6 +66,7 @@ def delete_all_jokes():
     conn = sqlite3.connect(db_joke)
     c = conn.cursor()
     c.execute("DELETE FROM jokes")
+    c.execute("DELETE FROM sqlite_sequence WHERE name='jokes'")  # Reset auto-increment index
     conn.commit()
     conn.close()
 
