@@ -77,53 +77,70 @@ def delete_all_jokes():
     db_joke.delete_all_jokes()
     return redirect("/database")
 
-@app.route("/home")
-def home():  
-    return render_template("home.html")
+@app.route("/home", methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        keyword = request.form["keyword"]
+        print("keyword1: ", keyword)
+        return redirect(url_for('result', keyword=keyword))
+    return render_template('home.html')
 
-@app.route('/result', methods=['POST'])
+
+@app.route('/result', methods=['GET','POST'])
 def result():
-    keyword = ""
+    # Check if the user is logged in
     username = session.get('username', None)
-    # _, _ , age, gender, country, fav_comedian = user_db.get_user_info_by_username(username)
-    _, _ , age, gender, race, country, fav_comedian = db_user.get_user_info_by_username(username)
-    keyword = request.form.get('keyword', 'None')
+    print("Username2: ", username)
 
-    if fav_comedian is None:
-        prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
-    else:
-        prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who is {race} and stays in {country} using {fav_comedian} style"
-    results = chatgpt(prompt)
-    bert_rating = [None]*5
-    for i in range(len(results)):
-        bert_rating[i] = bert_model.bert_rating(results[i])
-    sorted(zip(bert_rating, results), reverse=True)[:3]
-
-    result = chatgpt(prompt)
     BERT_rating = 2
 
-    if 'submit_button' in request.form:
-        # Get the username from the session
-        if not username:
-            flash('User not logged in.')
-            return redirect('/login')  # Redirect to login if user is not logged in
+    if request.method == 'POST':
+        keyword = request.form["keyword"]
+        print("keyword2: ", keyword)
+        jokes = None  # Initialize jokes to None
 
-        for i in range(5):  # Assuming there are 5 jokes
-            # Assuming you have a list of jokes, you can get the current joke
-            joke = result[i]
-            funny_rating = int(request.form.get(f'rate_{i}', 0))
-            offensive_rating = int(request.form.get(f'rate_offensive{i}', 0))
-            surprise_rating = int(request.form.get(f'rate_surprise{i}', 0))
-            # Get the reality radio input value
-            reality_rep_value = request.form.get(f'radio{i}', 'Yes')  # Default to 'Yes' if not provided
-            # Set reality_rep_rating to 0 if the value is 'No'
-            reality_rep_rating = 0 if reality_rep_value == 'No' else 1
+        # if jokes is not None:
+        #     jokes = [joke for joke in jokes if joke.strip('"')]
+        
+        # Check if the keyword has changed
+        if 'keyword' in session and session['keyword'] == keyword:
+            print("keyword3: ", keyword)
+            jokes = session.get('generated_jokes', [])  # Retrieve the jokes from the session
+            jokes = [joke.strip('"') for joke in jokes]
+            print("jokes: ", jokes)
+        else:
+            # Keyword has changed, so generate new jokes
+            session['keyword'] = keyword  # Store the new keyword in the session
+            print("keyword3: ", keyword)
+            _, _, age, gender, country, fav_comedian, _ = db_user.get_user_info_by_username(username)
 
-            # Insert the ratings into your database
-            db_joke.insert_joke(joke, keyword, BERT_rating, funny_rating, offensive_rating, surprise_rating, reality_rep_rating, username)
-        return render_template('result.html', response=result, keyword=keyword, confirmation_message="Thank you for your ratings!")
-    return render_template('result.html', response=result, keyword=keyword)
+            if fav_comedian is None:
+                prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
+            else:
+                prompt = f"give me 5 jokes about {keyword} for a {age} years old {gender} who stays in {country} using {fav_comedian} style"
 
+            jokes = chatgpt(prompt)
+            session['generated_jokes'] = jokes  # Store the generated jokes in the session
+            # Remove leading and trailing single quotation marks from jokes
+            jokes = [joke.strip('"') for joke in jokes]
+            print("jokes2: ", jokes)
+            
+        if "submit_button" in request.form:
+            for j in range(len(jokes)):  # Assuming there are 5 jokes
+                print("j:>>> ", j)
+                print("result:", jokes[j])
+                funny_rating = int(request.form.get(f'rate_{j+1}', 0))
+                offensive_rating = int(request.form.get(f'rate_offensive{j+1}', 0))
+                surprise_rating = int(request.form.get(f'rate_surprise{j+1}', 0))
+                # Get the reality radio input value
+                reality_rep_value = request.form.get(f'radio{j+1}', 'Yes')  # Default to 'Yes' if not provided
+                # Set reality_rep_rating to 0 if the value is 'No'
+                reality_rep_rating = 0 if reality_rep_value == 'No' else 1
+
+                # Insert the ratings into your database
+                db_joke.insert_joke(jokes[j], keyword, BERT_rating, funny_rating, offensive_rating, surprise_rating, reality_rep_rating, username) 
+            return render_template("home.html", confirmation_message="Thank you for your ratings!")  # Redirect to the home page
+    return render_template('result.html', response=jokes, keyword=keyword)
 
 
 if __name__ == '__main__':
