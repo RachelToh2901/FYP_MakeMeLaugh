@@ -15,6 +15,11 @@
         /* text-shadow: 2px 2px 4px #464444; */
         margin: 0;
       }
+      .message{
+        display: flow-root;
+        justify-content: center;
+        align-items: center;
+      }
       .center-container {
       display: flex;
       justify-content: center;
@@ -89,48 +94,16 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(255, 255, 255, 0.578);
         z-index: 999; /* Ensures the loading symbol appears on top of everything */
         display: none; /* Initially hide it */
-      }
-
-      .sec-loading .one {
-        height: 80px;
-        width: 80px;
-        border: var(--border-width) solid rgb(255, 140, 0);
-        transform: rotate(45deg);
-        border-radius: 0 50% 50% 50%;
-        position: relative;
-        animation: move 0.5s linear infinite alternate-reverse;
-      }
-      .sec-loading .one::before {
-        content: "";
-        position: absolute;
-        height: 55%;
-        width: 55%;
-        border-radius: 50%;
-        border: var(--border-width) solid transparent;
-        border-top-color: rgb(255, 140, 0);
-        border-bottom-color: rgb(255, 140, 0);
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        animation: rotate 1s linear infinite;
-      }
-
-      @keyframes rotate {
-        to {
-          transform: translate(-50%, -50%) rotate(360deg);
-        }
-      }
-      @keyframes move {
-        to {
-          transform: translateY(15px) rotate(45deg);
-        }
       }
     </style>
   </head>
   <body>
+    <div class="message">
+      {{ confirmation_message }}
+    </div>
     <h1>Make Me Laugh: Jokes Generator</h1>
     <div class="center-container">
       <div class="center-form">
@@ -140,7 +113,7 @@
             <input type="text" id="keyword" name="keyword"><br><br><br><br>
             <input type="submit" value="Generate joke" name= "generateBtn" id="generateBtn">
             <div class="sec-loading">
-              <div class="one"></div>
+              <img src="static/smile_loading.gif" alt="loading...">
             </div>
           </div>
         </form>
