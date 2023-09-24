@@ -6,7 +6,7 @@ def create_table():
     conn = sqlite3.connect(db_joke)
     c = conn.cursor()
     c.execute( 
-        """CREATE TABLE IF NOT EXISTS jokes 
+        """CREATE TABLE IF NOT EXISTS fixed_jokes 
         (joke_id INTEGER PRIMARY KEY AUTOINCREMENT,
         joke TEXT NOT NULL,
         keyword TEXT NOT NULL,
@@ -25,7 +25,7 @@ def create_table():
 def delete_table():
     conn = sqlite3.connect(db_joke)
     cursor = conn.cursor()
-    cursor.execute("DROP TABLE IF EXISTS jokes")
+    cursor.execute("DROP TABLE IF EXISTS fixed_jokes")
     conn.commit()
     conn.close()
 
@@ -33,7 +33,7 @@ def insert_joke(joke, keyword, BERT_rating, user_rating_funny, user_rating_offen
     conn = sqlite3.connect(db_joke)
     c = conn.cursor()
     c.execute(
-        "INSERT INTO jokes (joke, keyword, BERT_rating, user_rating_funny, user_rating_offensive, user_rating_surprise, user_rating_reality_rep, username) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO fixed_jokes (joke, keyword, BERT_rating, user_rating_funny, user_rating_offensive, user_rating_surprise, user_rating_reality_rep, username) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         (joke, keyword, BERT_rating, user_rating_funny, user_rating_offensive, user_rating_surprise, user_rating_reality_rep, username),
     )
     conn.commit()
@@ -42,7 +42,7 @@ def insert_joke(joke, keyword, BERT_rating, user_rating_funny, user_rating_offen
 def get_jokes_by_username(username):
     conn = sqlite3.connect(db_joke)
     c = conn.cursor()
-    c.execute("SELECT * FROM jokes WHERE username=?", (username,))
+    c.execute("SELECT * FROM fixed_jokes WHERE username=?", (username,))
     result = c.fetchall()
     conn.close()
     return result 
@@ -50,7 +50,7 @@ def get_jokes_by_username(username):
 def get_all_jokes():
     conn = sqlite3.connect(db_joke)
     c = conn.cursor()
-    c.execute("SELECT * FROM jokes")
+    c.execute("SELECT * FROM fixed_jokes")
     jokes = c.fetchall()
     conn.close()
     return jokes
@@ -58,15 +58,15 @@ def get_all_jokes():
 def delete_jokes_by_username(username):
     conn = sqlite3.connect(db_joke)
     c = conn.cursor()
-    c.execute("DELETE FROM jokes WHERE username=?", (username,))
+    c.execute("DELETE FROM fixed_jokes WHERE username=?", (username,))
     conn.commit()
     conn.close()
 
 def delete_all_fixed_jokes():
     conn = sqlite3.connect(db_joke)
     c = conn.cursor()
-    c.execute("DELETE FROM jokes")
-    c.execute("DELETE FROM sqlite_sequence WHERE name='jokes'")  # Reset auto-increment index
+    c.execute("DELETE FROM fixed_jokes")
+    c.execute("DELETE FROM sqlite_sequence WHERE name='fixed_jokes'")  # Reset auto-increment index
     conn.commit()
     conn.close()
 
@@ -75,4 +75,3 @@ if __name__ == "__main__":
     # create_table()
     print(get_all_jokes())
     
-# conn.close()
