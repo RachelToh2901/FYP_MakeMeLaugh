@@ -3,18 +3,61 @@
   <head>
     <title>Make Me Laugh: Jokes Generator</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
+
     <style>
-      body {
-        background-color:rgb(255, 242, 0);
+
+      html {
+        height:100%;
       }
+
+      body {
+        margin:0;
+      }
+
+      .bg {
+        animation:slide 3s ease-in-out infinite alternate;
+        background-image: linear-gradient(-60deg, white , #fdf542, orange, #ee7752 50% , #e73c7e 50%, purple);
+        bottom:0;
+        left:-50%;
+        opacity: 0.7;
+        position:fixed;
+        right:-50%;
+        top:0;
+        z-index:-1;
+      }
+
+      .bg2 {
+        animation-direction:alternate-reverse;
+        animation-duration:4s;
+      }
+
+      .bg3 {
+        animation-duration:5s;
+      }
+
+      @keyframes slide {
+        0% {
+          transform:translateX(-25%);
+        }
+        100% {
+          transform:translateX(25%);
+        }
+      }
+
       h1 {
-        color: rgb(255, 81, 0);
+        color: white;
         text-align: center;
-        font-size: 50px;
-        font-family: 'Comic Sans MS';       
+        font-size: 45px; 
+        font-family: 'Prompt';       
         /* text-shadow: 2px 2px 4px #464444; */
         margin: 0;
       }
+
       .message{
         display: flow-root;
         justify-content: center;
@@ -68,7 +111,7 @@
       input[type=submit] {
         text-decoration: none;
         margin: 4px 2px;
-        background-image: linear-gradient(darkorange, yellow);
+        background-image: linear-gradient(-45deg, darkorange, yellow);
         color: white; 
         border: 0px;
         font-size: 24px;
@@ -101,6 +144,9 @@
     </style>
   </head>
   <body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
     <div class="message">
       {{ confirmation_message }}
     </div>
