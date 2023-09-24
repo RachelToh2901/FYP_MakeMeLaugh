@@ -6,6 +6,7 @@
         table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
+        padding: 6px 6px;
         }
     </style>
 </head>
@@ -19,6 +20,7 @@
             <th>Gender</th>
             <th>Country</th>
             <th>Favourite Comedian</th>
+            <th>Personality</th>
         </tr>
         {% for user in users %}
         <tr>
@@ -28,11 +30,12 @@
             <td>{{ user[3] }}</td>
             <td>{{ user[4] }}</td>
             <td>{{ user[5] }}</td>
+            <td>{{ user[6] }}</td>
         </tr>
         {% endfor %}
     </table>
     <form method="post" action="{{ url_for('delete_user') }}">
-        <input type="text" name="username" placeholder="Enter username to delete">
+        <input type="text" name="username" placeholder="Enter username to delete"><br>
         <input type="submit" value="Delete User">
     </form>
     <form method="post" action="{{ url_for('delete_all_users') }}">
@@ -68,6 +71,38 @@
     </table>
 
     <form method="post" action="{{ url_for('delete_all_jokes') }}">
+        <input type="submit" value="Delete All Jokes">
+    </form>
+
+    <h1>Fixed Jokes Data</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Joke</th>
+            <th>Keyword</th>
+            <th>BERT rating</th>
+            <th>Funny rating</th>
+            <th>Offensive rating</th>
+            <th>Surprise rating</th>
+            <th>Reality rep rating</th>
+            <th>Username</th>
+        </tr>
+        {% for joke in jokes %}
+        <tr>
+            <td>{{ joke[0] }}</td>
+            <td>{{ joke[1] }}</td>
+            <td>{{ joke[2] }}</td>
+            <td>{{ joke[3] }}</td>
+            <td>{{ joke[4] }}</td>
+            <td>{{ joke[5] }}</td>
+            <td>{{ joke[6] }}</td>
+            <td>{{ joke[7] }}</td>
+            <td>{{ joke[8] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form method="post" action="{{ url_for('delete_all_fixed_jokes') }}">
         <input type="submit" value="Delete All Jokes">
     </form>
 
