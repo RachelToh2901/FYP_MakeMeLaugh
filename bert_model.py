@@ -112,7 +112,5 @@ if __name__ == "__main__":
         print(jokes[i])
         print(ratings[i])
 
-
-
     # model.summary()
     
