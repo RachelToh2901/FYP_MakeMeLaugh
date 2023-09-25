@@ -6,12 +6,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Roboto:wght@100&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
 
     <style>
+      body {
+        background-image: url("static/lizard.gif");
+        background-size: cover;
+      }
 
-      html {
+      /* html {
         height:100%;
       }
 
@@ -47,15 +52,15 @@
         100% {
           transform:translateX(25%);
         }
-      }
+      } */
 
       h1 {
         color: white;
         text-align: center;
         font-size: 45px; 
-        font-family: 'Prompt';       
+        font-family: "Croissant One";      
         /* text-shadow: 2px 2px 4px #464444; */
-        margin: 0;
+        margin:0px;
       }
 
       .message{
@@ -67,7 +72,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 650px;
+      height: 580px;
       }
       .center-form {
         width: 600px;
@@ -130,13 +135,13 @@
       }
       .sec-loading {
         height: 100vh;
-        width: 100vw;
+        width: 100wh;
         display: flex;
         align-items: center;
         justify-content: center;
         position: absolute;
         top: 0;
-        left: 0;
+        left: 100px;
         background-color: rgba(255, 255, 255, 0.578);
         z-index: 999; /* Ensures the loading symbol appears on top of everything */
         display: none; /* Initially hide it */
@@ -144,12 +149,13 @@
     </style>
   </head>
   <body>
-    <div class="bg"></div>
+    <!-- <div class="bg"></div>
     <div class="bg bg2"></div>
-    <div class="bg bg3"></div>
+    <div class="bg bg3"></div> -->
     <div class="message">
       {{ confirmation_message }}
     </div>
+    <h1> </h1>
     <h1>Make Me Laugh: Jokes Generator</h1>
     <div class="center-container">
       <div class="center-form">
@@ -159,7 +165,7 @@
             <input type="text" id="keyword" name="keyword"><br><br><br><br>
             <input type="submit" value="Generate joke" name= "generateBtn" id="generateBtn">
             <div class="sec-loading">
-              <img src="static/smile_loading.gif" alt="loading...">
+              <img src="static/kitten.gif" alt="loading...">
             </div>
           </div>
         </form>
