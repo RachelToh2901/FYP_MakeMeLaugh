@@ -7,13 +7,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
 
     <style>
       body {
-        background-image: url("static/lizard.gif");
-        background-size: cover;
+        background-color: #fbc42a;
       }
 
       /* html {
@@ -105,8 +105,10 @@
       }
       input {
         font-size:15px;
-        border: 1px solid black;
-        padding: 5px 5px;
+        border: 2px dash black;
+        border-radius: 18px;
+        padding: 8px 8px;
+        padding-left: 15px;
       }
       label {
           font-size:24px;
@@ -121,7 +123,7 @@
         border: 0px;
         font-size: 24px;
         font-weight:bold;
-        border-radius: 6px;
+        border-radius: 18px;
         padding: 10px 25px;
         cursor: pointer;
       }
@@ -134,29 +136,47 @@
         --border-width: 7px;
       }
       .sec-loading {
-        height: 100vh;
-        width: 100wh;
+        height: 100%;
+        width: 100%;
         display: flex;
-        align-items: center;
+        align-items:center;
         justify-content: center;
         position: absolute;
+        flex-direction: column;
         top: 0;
-        left: 100px;
-        background-color: rgba(255, 255, 255, 0.578);
+        left: 0;
+        /* background-color: rgba(255, 255, 255, 0.578); */
+        background-color: #fbc42a;
         z-index: 999; /* Ensures the loading symbol appears on top of everything */
         display: none; /* Initially hide it */
+      }
+      /* Define the container for the left side */
+      .left-container {
+        float: left;
+        padding: 0px;
+        margin-right: 0%;
+      }
+
+      /* Center the image within the container */
+      .left-container img {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        display: block;
+        margin: 0 auto;
+        max-width: 70%; /* Ensure the image does not exceed the container width */
       }
     </style>
   </head>
   <body>
-    <!-- <div class="bg"></div>
-    <div class="bg bg2"></div>
-    <div class="bg bg3"></div> -->
     <div class="message">
       {{ confirmation_message }}
     </div>
     <h1> </h1>
     <h1>Make Me Laugh: Jokes Generator</h1>
+    <div class="left-container">
+      <img src = "static/dog3.gif" style="width:450px;height:320px;">
+    </div>
     <div class="center-container">
       <div class="center-form">
         <form id="jokeForm" action="{{ url_for('result') }}" method="POST">
@@ -165,7 +185,8 @@
             <input type="text" id="keyword" name="keyword"><br><br><br><br>
             <input type="submit" value="Generate joke" name= "generateBtn" id="generateBtn">
             <div class="sec-loading">
-              <img src="static/kitten.gif" alt="loading...">
+              <img src="static/rat.gif" alt="loading..."><br><br>
+              <h1>Loading ...</h1>
             </div>
           </div>
         </form>
