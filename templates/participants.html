@@ -264,86 +264,91 @@ body {
         <div class="center-form">
             <div class="container">
                 <form method="POST" id="fixedForm">
-                    {% for category in jokes %}
-                    {% for joke in category['jokes'] %}
-                    <br><br>
-                    <p style="color:black;font-size: 20px;"><i class="fas fa-smile" style="color: #ffc700;"></i> {{ joke }}</p>
-                    <br><br>
-                    <div class="rate">
-                        <p>Funny:</p>
-                        <input type="radio" id="star5_{{ category_index }}_{{ joke_index }}"
-                            name="rate_{{ category_index }}_{{ joke_index }}" value="5" />
-                        <label for="star5_{{ category_index }}_{{ joke_index }}" title="5 stars">5 stars</label>
-                        <input type="radio" id="star4_{{ category_index }}_{{ joke_index }}"
-                            name="rate_{{ category_index }}_{{ joke_index }}" value="4" />
-                        <label for="star4_{{ category_index }}_{{ joke_index }}" title="4 stars">4 stars</label>
-                        <input type="radio" id="star3_{{ category_index }}_{{ joke_index }}"
-                            name="rate_{{ category_index }}_{{ joke_index }}" value="3" />
-                        <label for="star3_{{ category_index }}_{{ joke_index }}" title="3 stars">3 stars</label>
-                        <input type="radio" id="star2_{{ category_index }}_{{ joke_index }}"
-                            name="rate_{{ category_index }}_{{ joke_index }}" value="2" />
-                        <label for="star2_{{ category_index }}_{{ joke_index }}" title="2 stars">2 stars</label>
-                        <input type="radio" id="star1_{{ category_index }}_{{ joke_index }}"
-                            name="rate_{{ category_index }}_{{ joke_index }}" value="1" />
-                        <label for="star1_{{ category_index }}_{{ joke_index }}" title="1 star">1 star</label>
-                    </div>
-                    <div class="rate">
-                        <p>Offensive:</p>
-                        <input type="radio" id="star5_offensive_{{ category_index }}_{{ joke_index }}"
-                            name="rate_offensive_{{ category_index }}_{{ joke_index }}" value="5" />
-                        <label for="star5_offensive_{{ category_index }}_{{ joke_index }}" title="5 stars">5
-                            stars</label>
-                        <input type="radio" id="star4_offensive_{{ category_index }}_{{ joke_index }}"
-                            name="rate_offensive_{{ category_index }}_{{ joke_index }}" value="4" />
-                        <label for="star4_offensive_{{ category_index }}_{{ joke_index }}" title="4 stars">4
-                            stars</label>
-                        <input type="radio" id="star3_offensive_{{ category_index }}_{{ joke_index }}"
-                            name="rate_offensive_{{ category_index }}_{{ joke_index }}" value="3" />
-                        <label for="star3_offensive_{{ category_index }}_{{ joke_index }}" title="3 stars">3
-                            stars</label>
-                        <input type="radio" id="star2_offensive_{{ category_index }}_{{ joke_index }}"
-                            name="rate_offensive_{{ category_index }}_{{ joke_index }}" value="2" />
-                        <label for="star2_offensive_{{ category_index }}_{{ joke_index }}" title="2 stars">2
-                            stars</label>
-                        <input type="radio" id="star1_offensive_{{ category_index }}_{{ joke_index }}"
-                            name="rate_offensive_{{ category_index }}_{{ joke_index }}" value="1" />
-                        <label for="star1_offensive_{{ category_index }}_{{ joke_index }}" title="1 star">1 star</label>
-                    </div>
-                    <div class="rate">
-                        <p>Surprise:</p>
-                        <input type="radio" id="star5_surprise_{{ category_index }}_{{ joke_index }}"
-                            name="rate_surprise_{{ category_index }}_{{ joke_index }}" value="5" />
-                        <label for="star5_surprise_{{ category_index }}_{{ joke_index }}" title="5 stars">5
-                            stars</label>
-                        <input type="radio" id="star4_surprise_{{ category_index }}_{{ joke_index }}"
-                            name="rate_surprise_{{ category_index }}_{{ joke_index }}" value="4" />
-                        <label for="star4_surprise_{{ category_index }}_{{ joke_index }}" title="4 stars">4
-                            stars</label>
-                        <input type="radio" id="star3_surprise_{{ category_index }}_{{ joke_index }}"
-                            name="rate_surprise_{{ category_index }}_{{ joke_index }}" value="3" />
-                        <label for="star3_surprise_{{ category_index }}_{{ joke_index }}" title="3 stars">3
-                            stars</label>
-                        <input type="radio" id="star2_surprise_{{ category_index }}_{{ joke_index }}"
-                            name="rate_surprise_{{ category_index }}_{{ joke_index }}" value="2" />
-                        <label for="star2_surprise_{{ category_index }}_{{ joke_index }}" title="2 stars">2
-                            stars</label>
-                        <input type="radio" id="star1_surprise_{{ category_index }}_{{ joke_index }}"
-                            name="rate_surprise_{{ category_index }}_{{ joke_index }}" value="1" />
-                        <label for="star1_surprise_{{ category_index }}_{{ joke_index }}" title="1 star">1 star</label>
-                    </div>
-                    <p>Reality Representative:</p><br>
-                    <label class="container2">Yes
-                        <input type="radio" name="radio_{{ category_index }}_{{ joke_index }}"
-                            id="yes_{{ category_index }}_{{ joke_index }}" value="Yes" checked>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container2">No
-                        <input type="radio" name="radio_{{ category_index }}_{{ joke_index }}"
-                            id="no_{{ category_index }}_{{ joke_index }}" value="No">
-                        <span class="checkmark"></span>
-                    </label>
-                    {% endfor %}
-                    {% endfor %}
+                    <ol>
+                        {% for category in jokes %}
+                            {% for joke in category['jokes'] %}
+                                <br><br>
+                                <p><li style="color:black;font-size: 20px;font-family:'Comic Sans MS';"> {{ joke }}</p>
+                                <br><br>
+                                <ol>
+                                <div class="rate">
+                                    <p>Funny:</p>
+                                    <input type="radio" id="star5_{{ joke }}"
+                                        name="rate_{{ joke }}" value="5" />
+                                    <label for="star5_{{ joke }}" title="5 stars">5 stars</label>
+                                    <input type="radio" id="star4_{{ joke }}"
+                                        name="rate_{{ joke }}" value="4" />
+                                    <label for="star4_{{ joke }}" title="4 stars">4 stars</label>
+                                    <input type="radio" id="star3_{{ joke }}"
+                                        name="rate_{{ joke }}" value="3" />
+                                    <label for="star3_{{ joke }}" title="3 stars">3 stars</label>
+                                    <input type="radio" id="star2_{{ joke }}"
+                                        name="rate_{{ joke }}" value="2" />
+                                    <label for="star2_{{ joke }}" title="2 stars">2 stars</label>
+                                    <input type="radio" id="star1_{{ joke }}"
+                                        name="rate_{{ joke }}" value="1" />
+                                    <label for="star1_{{ joke }}" title="1 star">1 star</label>
+                                </div>
+                                <div class="rate">
+                                    <p>Offensive:</p>
+                                    <input type="radio" id="star5_offensive_{{ joke }}"
+                                        name="rate_offensive_{{ joke }}" value="5" />
+                                    <label for="star5_offensive_{{ joke }}" title="5 stars">5
+                                        stars</label>
+                                    <input type="radio" id="star4_offensive_{{ joke }}"
+                                        name="rate_offensive_{{ joke }}" value="4" />
+                                    <label for="star4_offensive_{{ joke }}" title="4 stars">4
+                                        stars</label>
+                                    <input type="radio" id="star3_offensive_{{ joke }}"
+                                        name="rate_offensive_{{ joke }}" value="3" />
+                                    <label for="star3_offensive_{{ joke }}" title="3 stars">3
+                                        stars</label>
+                                    <input type="radio" id="star2_offensive_{{ joke }}"
+                                        name="rate_offensive_{{ joke }}" value="2" />
+                                    <label for="star2_offensive_{{ joke }}" title="2 stars">2
+                                        stars</label>
+                                    <input type="radio" id="star1_offensive_{{ joke }}"
+                                        name="rate_offensive_{{ joke }}" value="1" />
+                                    <label for="star1_offensive_{{ joke }}" title="1 star">1 star</label>
+                                </div>
+                                <div class="rate">
+                                    <p>Surprise:</p>
+                                    <input type="radio" id="star5_surprise_{{ joke }}"
+                                        name="rate_surprise_{{ joke }}" value="5" />
+                                    <label for="star5_surprise_{{ joke }}" title="5 stars">5
+                                        stars</label>
+                                    <input type="radio" id="star4_surprise_{{ joke }}"
+                                        name="rate_surprise_{{ joke }}" value="4" />
+                                    <label for="star4_surprise_{{ joke }}" title="4 stars">4
+                                        stars</label>
+                                    <input type="radio" id="star3_surprise_{{ joke }}"
+                                        name="rate_surprise_{{ joke }}" value="3" />
+                                    <label for="star3_surprise_{{ joke }}" title="3 stars">3
+                                        stars</label>
+                                    <input type="radio" id="star2_surprise_{{ joke }}"
+                                        name="rate_surprise_{{ joke }}" value="2" />
+                                    <label for="star2_surprise_{{ joke }}" title="2 stars">2
+                                        stars</label>
+                                    <input type="radio" id="star1_surprise_{{ joke }}"
+                                        name="rate_surprise_{{ joke }}" value="1" />
+                                    <label for="star1_surprise_{{ joke }}" title="1 star">1 star</label>
+                                </div>
+                                <p>Reality Representative:</p><br>
+                                <label class="container2">Yes
+                                    <input type="radio" name="radio_{{ joke }}"
+                                        id="yes_{{ joke }}" value="Yes" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container2">No
+                                    <input type="radio" name="radio_{{ joke }}"
+                                        id="no_{{ joke }}" value="No">
+                                    <span class="checkmark"></span>
+                                </label>
+                                </ol>
+                            </li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ol>
                     <input style="font-size: 18px; width:max-content;" type="submit" name="submit_button" value="Submit"
                         class="right">
                 </form>
@@ -362,5 +367,4 @@ body {
         </div>
     </div>
 </body>
-
 </html>
