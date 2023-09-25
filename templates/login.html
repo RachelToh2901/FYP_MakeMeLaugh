@@ -16,6 +16,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+
 
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
 
@@ -28,7 +31,11 @@
     }
 
     body {
-      background: linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) ;
+      /* background-image: url("static/cat.gif"); */
+      background: 
+        /* url("static/kitten.gif") no-repeat , */
+        /* linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) , */
+        linear-gradient(-45deg, #fdf542, #fbc42a,#f6bb19, #ee7752) ;
         /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
         background-size: 400% 400%;
         animation: gradient 13s ease infinite;
@@ -47,10 +54,10 @@
     }
       h1 {
         /* color: rgb(255, 81, 0); */
-        color: white;
+        color: White;
         text-align: center;
         font-size: 50px;
-        font-family: 'Prompt', sans-serif;   
+        font-family: "Croissant One", sans-serif;   
         margin: 0;
       }
       .center-container {
@@ -58,8 +65,12 @@
       justify-content: center;
       align-items: center;
       height: 650px;
+      position: relative;
+      margin-left: 0px; /* Adjust the margin value as needed */
       }
       .center-form {
+        /* position: fixed;
+        left: 400px; */
         width:500px;
         height: 525px;
         margin: 40px 50px;
@@ -81,7 +92,8 @@
       }
       input {
         font-size:15px;
-        border: 1px solid black;
+        border: 2px dash #ee7752;
+        border-radius: 18px;
         padding: 5px 5px;
       }
       label {
@@ -97,7 +109,7 @@
         border: 0px;
         font-size: 24px;
         font-weight:bold;
-        border-radius: 6px;
+        border-radius: 18px;
         padding: 10px 25px;
         cursor: pointer;
       }
@@ -106,10 +118,32 @@
         background-image: none;
         color: black;
       }
+
+      /* Define the container for the left side */
+      .left-container {
+          float: left;
+          padding: 0px;
+          margin-right: 0%;
+        }
+
+        /* Center the image within the container */
+        .left-container img {
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          display: block;
+          margin: 0 auto;
+          max-width: 70%; /* Ensure the image does not exceed the container width */
+        }
+
     </style>
+
 </head>
 <body>
     <h1>Login Page</h1>
+    <div class="left-container">
+      <img src = "static/kitten.gif">
+    </div>
     <div class="center-container">
       <div class="center-form">
         <form method="POST" action="{{ url_for('login') }}">
