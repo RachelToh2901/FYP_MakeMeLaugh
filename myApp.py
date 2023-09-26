@@ -110,7 +110,7 @@ def result():
 
             if fav_comedian is None:
                 # prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
-                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}"
+                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}, with a touch of humor inspired by Uncle Roger's style."
             else:
                 # prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country} using {fav_comedian} style"
                 prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}, with a touch of humor inspired by {fav_comedian}'s style."
@@ -153,7 +153,6 @@ fixed_jokes = data['fixed_jokes']
 def participants():
     # Check if the user is logged in
     username = session.get('username', None)
-    print("Username2: ", username)
     keyword = None
     jokes = None
     bert_rating = "No need"
@@ -165,7 +164,6 @@ def participants():
             keyword = category['keyword']  # Get the keyword for this category
             
             for joke in jokes:
-                print(joke)
                 funny_rating = int(request.form.get(f'rate_{joke}', 0))
                 offensive_rating = int(request.form.get(f'rate_offensive_{joke}', 0))
                 surprise_rating = int(request.form.get(f'rate_surprise_{joke}', 0))
