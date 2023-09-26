@@ -18,7 +18,7 @@ def create_table():
         username TEXT NOT NULL,
         FOREIGN KEY (username) REFERENCES users (username))"""
     )
-    insert_joke("a_joke", "a_keyword", 3, 2, 1, 4, 5, "admin")
+    # insert_joke("a_joke", "a_keyword", 3, 2, 1, 4, 5, "admin")
     conn.commit()
     conn.close()
 
@@ -71,9 +71,7 @@ def delete_all_jokes():
     conn.close()
 
 if __name__ == "__main__":
-    # delete_table()
+    delete_table()
     create_table()
-    # delete_all_jokes()
+    delete_all_jokes()
     print(get_all_jokes())
-    
-# conn.close()

@@ -79,6 +79,6 @@ def delete_all_users():
 if __name__ == "__main__":
     # delete_table()
     # create_table()
-    # delete_all_users()
+    delete_all_users()
     print(get_all_user())
     
