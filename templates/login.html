@@ -1,10 +1,10 @@
 {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <ul class=flashes>
+        <div class=flashes>
         {% for message in messages %}
-            <li>{{ message }}</li>
+          {{ message }}
         {% endfor %}
-        </ul>
+        </div>
     {% endif %}
 {% endwith %}
 
@@ -23,33 +23,38 @@
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
 
     <style>
-    html, body {
-      width: 100%;
-      height:100%;
-    }
+      .flashes {
+        align-items:center;
+        justify-content: center;
+        display: flex;
+        width: 95%;
+        background-color: lightgray;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 12px;
+        margin-left: 25px;
+        font-family:'Comic Sans MS';
+      }
 
-    body {
-      /* background-image: url("static/cat.gif"); */
-      background: 
-        /* url("static/kitten.gif") no-repeat , */
-        /* linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) , */
-        linear-gradient(-45deg, #fdf542, #fbc42a,#f6bb19, #ee7752) ;
-        /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-        background-size: 400% 400%;
-        animation: gradient 13s ease infinite;
-    }
+      body {
+        background: linear-gradient(-45deg, #fdf542, #fbc42a,#f6bb19, #ee7752) ;
+      /* linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) ; */
+          /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+          background-size: 400% 400%;
+          animation: gradient 13s ease infinite;
+      }
 
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
+      @keyframes gradient {
+          0% {
+              background-position: 0% 50%;
+          }
+          50% {
+              background-position: 100% 50%;
+          }
+          100% {
+              background-position: 0% 50%;
+          }
+      }
       h1 {
         /* color: rgb(255, 81, 0); */
         color: White;
@@ -90,9 +95,10 @@
       }
       input {
         font-size:15px;
-        border: 2px dash #ee7752;
+        border: 2px dash;
         border-radius: 18px;
-        padding: 5px 5px;
+        padding: 8px 8px;
+        padding-left: 15px;
       }
       label {
           font-size:24px;
@@ -127,12 +133,12 @@
 
         /* Center the image within the container */
         .left-container img {
-          position: fixed;
+          position: absolute;
           bottom: 0;
-          right: 0;
+          left: 0;
           display: block;
-          margin: 0 auto;
-          max-width: 70%; /* Ensure the image does not exceed the container width */
+          margin: 0;
+          max-width: fit-content;/* Ensure the image does not exceed the container width */
         }
 
     </style>
@@ -141,7 +147,7 @@
 <body>
     <h1>Login Page</h1>
     <div class="left-container">
-      <img src = "static/kitten.gif">
+      <img src = "static/kitten.gif" style="width:450px;height:480px;">
     </div>
     <div class="center-container">
       <div class="center-form">

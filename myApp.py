@@ -47,8 +47,12 @@ def signup():
         country = request.form["country"]
         fav_comedian = request.form["fav_comedian"]
         personality = request.form["personality"]
-        db_user.create_user(username, password, age, gender, country, fav_comedian, personality)
-        return redirect("/login")
+        if db_user.get_user_info_by_username(username):
+            flash("The username is used")
+            return render_template("signup.html")
+        else:
+            db_user.create_user(username, password, age, gender, country, fav_comedian, personality)
+            return redirect("/login")
     return render_template("signup.html")
 
 
@@ -105,9 +109,11 @@ def result():
             _, _, age, gender, country, fav_comedian, _ = db_user.get_user_info_by_username(username)
 
             if fav_comedian is None:
-                prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
+                # prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
+                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}, with a touch of humor inspired by Uncle Roger's style."
             else:
-                prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country} using {fav_comedian} style"
+                # prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country} using {fav_comedian} style"
+                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}, with a touch of humor inspired by {fav_comedian}'s style."
 
             # get jokes from gpt
             gen_jokes = chatgpt(prompt)
@@ -138,49 +144,7 @@ def result():
             return render_template("home.html", confirmation_message="Thank you for your ratings!")  # Redirect to the home page
     return render_template('result.html', response=jokes, keyword=keyword)
 
-# Define a list of dictionaries to represent fixed 15 jokes
-# fixed_jokes = [
-#     {
-#         'keyword': 'Monash',
-#         'jokes': [
-#             "You know you're a Monash Malaysia student when you can navigate the campus blindfolded, but you still can't figure out where the cafeteria is.",
-#             'Uncle Roger tells you, Monash students are like fried rice – they mix and match courses until they create their own unique major, like "Economics with a side of Film Studies!"',
-#             "Aiyoh, Monash students spend more time searching for parking spots than they do studying. If they collected parking tickets, they'd have a degree in fines!"
-#         ]
-#     },
-#     {
-#         'keyword': 'parenting',
-#         'jokes': [
-#             "In Malaysia, we have a 'two-in-one' parenting style – we're not just parents; we're also taxi drivers, chefs, and professional negotiators!",
-#             "You know you're a Malaysian parent when you've perfected the 'silent threat' look that can stop your child's misbehaviour in its tracks. It's our version of the Death Stare!",
-#             "In Malaysia, bedtime is a suggestion, not a rule. 'Sleep early' means 'stay up until 2 AM watching YouTube', and 'brush your teeth' is optional!"
-#         ]
-#     },
-#     {
-#         'keyword': 'Elsa',
-#         'jokes': [
-#             'If Elsa were Malaysian, her signature line wouldn\'t be "Let it go." It\'d be "Let\'s makan!" – she\'d turn the palace into a mamak stall for sure!',
-#             'Imagine Elsa trying to find Olaf in Malaysia – she\'d be like, "Olaf, I know you\'re here somewhere... Oh wait, that\'s just a melted ice cream cone."',
-#             'Why shouldn’t you give Elsa a balloon? Because she’ll “Let it go”.'
-#         ]
-#     },
-#     {
-#         'keyword': 'education',
-#         'jokes': [
-#             "In Malaysia, we have three languages: Bahasa Malaysia, English, and 'Math-lish'. Trying to figure out the maths problems in school is like deciphering a secret code!",
-#             "You know you're in a Malaysian school when you have more uniforms than weekend outfits. It's like a fashion show sponsored by the Ministry of Education!",
-#             "Malaysian schools are the only place where 'recess' feels like a Michelin-star dining experience. All hail the 'nasi lemak' and 'roti canai' stalls!"
-#         ]
-#     },
-#     {
-#         'keyword': 'Monash confession',
-#         'jokes': [
-#             "Why did the Monash Confession page get a Michelin star? Because it serves up a daily dose of drama and laughter that's worth the hype!",
-#             "Aiya, Monash Confession page, it's like a bowl of char kway teow – you never know what you're gonna get, but it's always a bit spicy!",
-#             "Why did the Monash Confession page win the 'Most Mysterious Page' award? Because even Scooby-Doo couldn't solve some of those confessions!"
-#         ]
-#     }
-# ]
+
 with open('fixed_jokes.json', 'r', encoding='utf-8') as file:
     data = json.load(file)  
 fixed_jokes = data['fixed_jokes']
@@ -189,7 +153,6 @@ fixed_jokes = data['fixed_jokes']
 def participants():
     # Check if the user is logged in
     username = session.get('username', None)
-    print("Username2: ", username)
     keyword = None
     jokes = None
     bert_rating = "No need"
@@ -201,7 +164,6 @@ def participants():
             keyword = category['keyword']  # Get the keyword for this category
             
             for joke in jokes:
-                print(joke)
                 funny_rating = int(request.form.get(f'rate_{joke}', 0))
                 offensive_rating = int(request.form.get(f'rate_offensive_{joke}', 0))
                 surprise_rating = int(request.form.get(f'rate_surprise_{joke}', 0))
