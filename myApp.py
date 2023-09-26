@@ -47,8 +47,12 @@ def signup():
         country = request.form["country"]
         fav_comedian = request.form["fav_comedian"]
         personality = request.form["personality"]
-        db_user.create_user(username, password, age, gender, country, fav_comedian, personality)
-        return redirect("/login")
+        if db_user.get_user_info_by_username(username):
+            flash("The username is used")
+            return render_template("signup.html")
+        else:
+            db_user.create_user(username, password, age, gender, country, fav_comedian, personality)
+            return redirect("/login")
     return render_template("signup.html")
 
 
