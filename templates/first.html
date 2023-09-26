@@ -107,17 +107,62 @@
     </style>
   </head>
   <body>
+    <audio id="loginMeow">
+      <source src= "static/meow2.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="signUpMeow">
+      <source src= "static/meow_trim.mov" type="video/mp4">
+    </audio>
+
     <div class = "center-box">
       <div class = "box">
         <div class="container">
           <h1>Make Me Laugh</h1>
           <h2>Welcome to Joke Generator World</h2>
           <div class = "button-container">
-            <button class="login button1" onclick="window.location.href='/login'">Login</button>
-            <button class="signup button2" onclick="window.location.href='/signup'">Signup</button>
+             <button class="login button1" onclick="loginAndPlaySound()" type="button">Login</button>
+            <!-- <button class="login button1" onclick="window.location.href='/login'">Login</button> -->
+            <button class="signup button2" onclick="signUpAndPlaySound()" type="button">Signup</button>
+            <!-- <button class="signup button2" onclick="window.location.href='/signup'">Signup</button> -->
           </div>     
         </div>
       </div>
     </div>
+
+    <script>
+    function loginAndPlaySound() {
+        // Play the sound
+        var x = document.getElementById("loginMeow"); 
+        x.play();
+
+        // Delay the redirection after the sound finishes playing
+        setTimeout(function() {
+            // Perform the login action here, e.g., redirect to a login page
+            window.location.href = '/login';
+        }, x.duration * 1000); // Delay in milliseconds (using audio duration)
+    }
+
+    function signUpAndPlaySound() {
+        // Play the sound
+        var x = document.getElementById("signUpMeow"); 
+        x.play();
+
+        // Delay the redirection after the sound finishes playing
+        setTimeout(function() {
+            // Perform the login action here, e.g., redirect to a login page
+            window.location.href = '/signup';
+        }, x.duration * 1000); // Delay in milliseconds (using audio duration)
+    }
+
+      // var x = document.getElementById("loginMeow
+"); 
+
+      // function playAudio() { 
+      //   x.play(); 
+      // } 
+    
+  </script>
+      
   </body>
 </html>
