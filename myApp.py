@@ -109,9 +109,11 @@ def result():
             _, _, age, gender, country, fav_comedian, _ = db_user.get_user_info_by_username(username)
 
             if fav_comedian is None:
-                prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
+                # prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
+                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}"
             else:
-                prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country} using {fav_comedian} style"
+                # prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country} using {fav_comedian} style"
+                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}, with a touch of humor inspired by {fav_comedian}'s style."
 
             # get jokes from gpt
             gen_jokes = chatgpt(prompt)
