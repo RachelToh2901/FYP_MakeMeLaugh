@@ -4,7 +4,6 @@ import os
 from chatgpt import chatgpt
 import db_user 
 import db_joke
-import db_fixedjokes
 import bert_model
 import json
 
@@ -61,8 +60,7 @@ def admin_options():
 def show_users():
     users = db_user.get_all_user()
     jokes = db_joke.get_all_jokes()
-    fixed_jokes = db_fixedjokes.get_all_jokes()
-    return render_template('database.html', users=users, jokes=jokes, fixed_jokes=fixed_jokes)
+    return render_template('database.html', users=users, jokes=jokes)
 
 @app.route('/delete_user', methods=['POST'])
 def delete_user():
@@ -77,11 +75,6 @@ def delete_all_users():
 @app.route('/delete_all_jokes', methods=['POST'])
 def delete_all_jokes():
     db_joke.delete_all_jokes()
-    return redirect("/database")
-
-@app.route('/delete_all_fixed_jokes', methods=['POST'])
-def delete_all_fixed_jokes():
-    db_fixedjokes.delete_all_fixed_jokes()
     return redirect("/database")
 
 @app.route("/home", methods=['GET', 'POST'])
@@ -196,32 +189,29 @@ fixed_jokes = data['fixed_jokes']
 def participants():
     # Check if the user is logged in
     username = session.get('username', None)
+    print("Username2: ", username)
     keyword = None
     jokes = None
-    # BERT_rating = 2
-
-    print(fixed_jokes)
+    bert_rating = "No need"
 
     # Check if the user has submitted the ratings form
     if request.method == 'POST' and "submit_button" in request.form:
-        for i, category in enumerate(fixed_jokes):
+        for category in fixed_jokes:
             jokes = category['jokes']
             keyword = category['keyword']  # Get the keyword for this category
             
-            for j, joke in enumerate(jokes):
+            for joke in jokes:
                 print(joke)
-                joke_rating = bert_model.bert_rating(joke)
-                print(joke_rating)
-                funny_rating = int(request.form.get(f'rate_funny_{i}_{j}', 0))
-                offensive_rating = int(request.form.get(f'rate_offensive_{i}_{j}', 0))
-                surprise_rating = int(request.form.get(f'rate_surprise_{i}_{j}', 0))
-                reality_rep_value = request.form.get(f'radio_{i}_{j}', 'Yes')
+                funny_rating = int(request.form.get(f'rate_{joke}', 0))
+                offensive_rating = int(request.form.get(f'rate_offensive_{joke}', 0))
+                surprise_rating = int(request.form.get(f'rate_surprise_{joke}', 0))
+                reality_rep_value = request.form.get(f'radio_{joke}', 'Yes')
                 reality_rep_rating = 0 if reality_rep_value == 'No' else 1
 
                 # Store the ratings in the database, along with the keyword
-                db_fixedjokes.insert_joke(joke, keyword, joke_rating, funny_rating, offensive_rating, surprise_rating, reality_rep_rating, username)
+                db_joke.insert_joke(joke, keyword, bert_rating, funny_rating, offensive_rating, surprise_rating, reality_rep_rating, username)
 
-        return render_template("participants.html", confirmation_message="Thank you for your ratings!")
+        return render_template("home.html", confirmation_message="Thank you for your ratings!")
 
     return render_template('participants.html', jokes=fixed_jokes, keyword=keyword)
 

@@ -4,15 +4,39 @@
     <meta charset="UTF-8">
     <title>Signup</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
+
+
     <style>
-        body {
-          background-color:rgb(255, 242, 0);
+    body {
+      background: linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) ;
+        /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+        background-size: 400% 400%;
+        animation: gradient 13s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
         }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
         h1 {
-          color: rgb(255, 81, 0);
+          color: white;
           text-align: center;
           font-size: 35px;
-          font-family:'Comic Sans MS' ;
+          font-family:"Croissant One", sans-serif;
           margin: 0;
         }
         .center-container {
@@ -39,10 +63,11 @@
           float: right;
         }
         input {
-            font-size:15px;
-            border: 1px solid black;
-            padding: 5px 5px;
-        }
+        font-size:15px;
+        border: 2px dash #ee7752;
+        border-radius: 18px;
+        padding: 5px 5px;
+      }
         label {
             font-size:18px;
             color: rgb(255, 140, 0);
@@ -51,12 +76,12 @@
         input[type=submit] {
           text-decoration: none;
           margin: 4px 2px;
-          background-image: linear-gradient(darkorange, yellow);
+          background-image: linear-gradient(-45deg, darkorange, yellow);
           color: white; 
           border: 0px;
           font-size: 18px;
           font-weight:bold;
-          border-radius: 6px;
+          border-radius: 18px;
           padding: 10px 25px;
           cursor: pointer;
         }
@@ -66,10 +91,11 @@
           color: black;
         }
         select{
-          border: 1px solid black;
-          font-size: 15px;
-          padding: 5px 0px;
-          border-radius: 0px;
+          border: 2px dash #ee7752;
+          height: 30px;
+          /* border-spacing: 10px;
+          padding: 5px 5px; */
+          border-radius: 100px;
         }
     </style>
 </head>

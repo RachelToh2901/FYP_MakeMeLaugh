@@ -73,6 +73,7 @@ def delete_all_jokes():
 if __name__ == "__main__":
     # delete_table()
     # create_table()
+    delete_all_jokes()
     print(get_all_jokes())
     
 # conn.close()

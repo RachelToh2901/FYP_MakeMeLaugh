@@ -3,18 +3,66 @@
   <head>
     <title>Make Me Laugh: Jokes Generator</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
+
     <style>
       body {
-        background-color:rgb(255, 242, 0);
+        background-color: #fbc42a;
       }
+
+      /* html {
+        height:100%;
+      }
+
+      body {
+        margin:0;
+      }
+
+      .bg {
+        animation:slide 3s ease-in-out infinite alternate;
+        background-image: linear-gradient(-60deg, white , #fdf542, orange, #ee7752 50% , #e73c7e 50%, purple);
+        bottom:0;
+        left:-50%;
+        opacity: 0.7;
+        position:fixed;
+        right:-50%;
+        top:0;
+        z-index:-1;
+      }
+
+      .bg2 {
+        animation-direction:alternate-reverse;
+        animation-duration:4s;
+      }
+
+      .bg3 {
+        animation-duration:5s;
+      }
+
+      @keyframes slide {
+        0% {
+          transform:translateX(-25%);
+        }
+        100% {
+          transform:translateX(25%);
+        }
+      } */
+
       h1 {
-        color: rgb(255, 81, 0);
+        color: white;
         text-align: center;
-        font-size: 50px;
-        font-family: 'Comic Sans MS';       
+        font-size: 45px; 
+        font-family: "Croissant One";      
         /* text-shadow: 2px 2px 4px #464444; */
-        margin: 0;
+        margin:0px;
       }
+
       .message{
         display: flow-root;
         justify-content: center;
@@ -24,7 +72,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 650px;
+      height: 580px;
       }
       .center-form {
         width: 600px;
@@ -57,8 +105,10 @@
       }
       input {
         font-size:15px;
-        border: 1px solid black;
-        padding: 5px 5px;
+        border: 2px dash black;
+        border-radius: 18px;
+        padding: 8px 8px;
+        padding-left: 15px;
       }
       label {
           font-size:24px;
@@ -68,12 +118,12 @@
       input[type=submit] {
         text-decoration: none;
         margin: 4px 2px;
-        background-image: linear-gradient(darkorange, yellow);
+        background-image: linear-gradient(-45deg, darkorange, yellow);
         color: white; 
         border: 0px;
         font-size: 24px;
         font-weight:bold;
-        border-radius: 6px;
+        border-radius: 18px;
         padding: 10px 25px;
         cursor: pointer;
       }
@@ -86,17 +136,35 @@
         --border-width: 7px;
       }
       .sec-loading {
-        height: 100vh;
-        width: 100vw;
+        height: 100%;
+        width: 100%;
         display: flex;
-        align-items: center;
+        align-items:center;
         justify-content: center;
         position: absolute;
+        flex-direction: column;
         top: 0;
         left: 0;
-        background-color: rgba(255, 255, 255, 0.578);
+        /* background-color: rgba(255, 255, 255, 0.578); */
+        background-color: #fbc42a;
         z-index: 999; /* Ensures the loading symbol appears on top of everything */
         display: none; /* Initially hide it */
+      }
+      /* Define the container for the left side */
+      .left-container {
+        float: left;
+        padding: 0px;
+        margin-right: 0%;
+      }
+
+      /* Center the image within the container */
+      .left-container img {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        display: block;
+        margin: 0 auto;
+        max-width: 70%; /* Ensure the image does not exceed the container width */
       }
     </style>
   </head>
@@ -104,7 +172,11 @@
     <div class="message">
       {{ confirmation_message }}
     </div>
+    <h1> </h1>
     <h1>Make Me Laugh: Jokes Generator</h1>
+    <div class="left-container">
+      <img src = "static/dog3.gif" style="width:450px;height:320px;">
+    </div>
     <div class="center-container">
       <div class="center-form">
         <form id="jokeForm" action="{{ url_for('result') }}" method="POST">
@@ -113,14 +185,15 @@
             <input type="text" id="keyword" name="keyword"><br><br><br><br>
             <input type="submit" value="Generate joke" name= "generateBtn" id="generateBtn">
             <div class="sec-loading">
-              <img src="static/smile_loading.gif" alt="loading...">
+              <img src="static/rat.gif" alt="loading..."><br><br>
+              <h1>Loading ...</h1>
             </div>
           </div>
         </form>
         <br>
         <form method="get" action="{{ url_for('participants') }}">
           <div class="container2">
-            <input type="submit" value="Additionl Jokes">
+            <input type="submit" value="Additional Jokes">
           </div>
         </form>
         <br>
