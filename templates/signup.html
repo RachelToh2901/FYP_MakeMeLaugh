@@ -1,3 +1,13 @@
+{% with signup_messages = get_flashed_messages() %}
+    {% if signup_messages %}
+        <div class=flashes>
+        {% for message in signup_messages %}
+          {{ message }}
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,89 +24,101 @@
 
 
     <style>
-    body {
-      background: linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) ;
-        /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-        background-size: 400% 400%;
-        animation: gradient 13s ease infinite;
-    }
-
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-        h1 {
-          color: white;
-          text-align: center;
-          font-size: 35px;
-          font-family:"Croissant One", sans-serif;
-          margin: 0;
-        }
-        .center-container {
-        display: flex;
+      .flashes {
+        align-items:center;
         justify-content: center;
-        align-items: center;
-        height: 960px;
-        }
-        .center-form {
-          width:500px;
-          height: 880px;
-          border: none;
-          background-color:white;
-          border-radius: 20px;
-          padding: 30px;
-        }
-        .container {
-          display: flex;
-          flex-direction: column;
-          align-items: left;
-          text-align: left;
-        }
-        input.right {
-          float: right;
-        }
-        input {
+        display: flex;
+        width: 95%;
+        background-color: lightgray;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 12px;
+        margin-left: 25px;
+        font-family:'Comic Sans MS';
+      }
+      body {
+        background: linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) ;
+          /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+          background-size: 400% 400%;
+          animation: gradient 13s ease infinite;
+      }
+
+      @keyframes gradient {
+          0% {
+              background-position: 0% 50%;
+          }
+          50% {
+              background-position: 100% 50%;
+          }
+          100% {
+              background-position: 0% 50%;
+          }
+      }
+      h1 {
+        color: white;
+        text-align: center;
+        font-size: 35px;
+        font-family:"Croissant One", sans-serif;
+        margin: 0;
+      }
+      .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 960px;
+      }
+      .center-form {
+        width:500px;
+        height: 880px;
+        border: none;
+        background-color:white;
+        border-radius: 20px;
+        padding: 30px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        text-align: left;
+      }
+      input.right {
+        float: right;
+      }
+      input {
         font-size:15px;
         border: 2px dash #ee7752;
         border-radius: 18px;
         padding: 5px 5px;
       }
-        label {
-            font-size:18px;
-            color: rgb(255, 140, 0);
-            font-family:'Comic Sans MS' ;
-        }
-        input[type=submit] {
-          text-decoration: none;
-          margin: 4px 2px;
-          background-image: linear-gradient(-45deg, darkorange, yellow);
-          color: white; 
-          border: 0px;
-          font-size: 18px;
-          font-weight:bold;
-          border-radius: 18px;
-          padding: 10px 25px;
-          cursor: pointer;
-        }
-        input[type=submit]:hover {
-          background-color: #f6c468;
-          background-image: none;
-          color: black;
-        }
-        select{
-          border: 2px dash #ee7752;
-          height: 30px;
-          /* border-spacing: 10px;
-          padding: 5px 5px; */
-          border-radius: 100px;
-        }
+      label {
+          font-size:18px;
+          color: rgb(255, 140, 0);
+          font-family:'Comic Sans MS' ;
+      }
+      input[type=submit] {
+        text-decoration: none;
+        margin: 4px 2px;
+        background-image: linear-gradient(-45deg, darkorange, yellow);
+        color: white; 
+        border: 0px;
+        font-size: 18px;
+        font-weight:bold;
+        border-radius: 18px;
+        padding: 10px 25px;
+        cursor: pointer;
+      }
+      input[type=submit]:hover {
+        background-color: #f6c468;
+        background-image: none;
+        color: black;
+      }
+      select{
+        border: 2px dash #ee7752;
+        height: 30px;
+        /* border-spacing: 10px;
+        padding: 5px 5px; */
+        border-radius: 100px;
+      }
     </style>
 </head>
 <body>
@@ -106,11 +128,11 @@
           <form method="POST" action="{{ url_for('signup') }}">
             <div class="container">
                 <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username"><br><br>
+                <input type="text" id="username" name="username" required><br><br>
                 <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password"><br><br>
+                <input type="password" id="password" name="password" required><br><br>
                 <label for="age">Age:</label><br>
-                <input type="text" id="age" name="age"><br><br>
+                <input type="number" id="age" name="age" min="1" required><br><br>
                 <label for="gender">Gender:</label><br>
                 <select name="gender" id="gender">
                   <option value="female">Female</option>
@@ -118,10 +140,10 @@
                   <option value="empty" selected></option>
                 </select><br><br>
                 <label for="country">Country:</label><br>
-                <input type="text" id="country" name="country"><br><br>
+                <input type="text" id="country" name="country" required><br><br>
                 <label for="Fav_Comedian">Favourite Comedian: (optional)</label><br>
                 <input type="text" id="fav_comedian" name="fav_comedian"><br><br>
-                <label for="personality">MBTI Personality (optional):</label><br>
+                <label for="personality">MBTI Personality:</label><br>
                 <select name="personality" id="personality">
                   <option value="architect">Architect (INTJ)</option>
                   <option value="logician">Logician (INTP)</option>
