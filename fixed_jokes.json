@@ -2,44 +2,78 @@
     "fixed_jokes" : [
         {
             "keyword": "Monash",
-            "jokes": [
-                "You know you're a Monash Malaysia student when you can navigate the campus blindfolded, but you still can't figure out where the cafeteria is.",
-                "Uncle Roger tells you, Monash students are like fried rice – they mix and match courses until they create their own unique major, like 'Economics with a side of Film Studies!'",
-                "Aiyoh, Monash students spend more time searching for parking spots than they do studying. If they collected parking tickets, they'd have a degree in fines!"
-            ]
+            "joke": ["You know you're a Monash Malaysia student when you can navigate the campus blindfolded, but you still can't figure out where the cafeteria is."],
+            "rating": 0.37328562
+        },
+        {
+            "keyword": "Monash",
+            "joke": ["Uncle Roger tells you, Monash students are like fried rice – they mix and match courses until they create their own unique major, like 'Economics with a side of Film Studies!'"],
+            "rating": 0.25415146
+        },
+        {
+            "keyword": "Monash",
+            "joke": ["Aiyoh, Monash students spend more time searching for parking spots than they do studying. If they collected parking tickets, they'd have a degree in fines!"],
+            "rating": -0.1331872
         },
         {
             "keyword": "parenting",
-            "jokes": [
-                "In Malaysia, we have a 'two-in-one' parenting style – we're not just parents; we're also taxi drivers, chefs, and professional negotiators!",
-                "You know you're a Malaysian parent when you've perfected the 'silent threat' look that can stop your child's misbehaviour in its tracks. It's our version of the Death Stare!",
-                "In Malaysia, bedtime is a suggestion, not a rule. 'Sleep early' means 'stay up until 2 AM watching YouTube', and 'brush your teeth' is optional!"
-            ]
+            "joke": ["In Malaysia, we have a 'two-in-one' parenting style – we're not just parents; we're also taxi drivers, chefs, and professional negotiators!"],
+            "rating": -0.09474754
+        },
+        {
+            "keyword": "parenting",
+            "joke": ["You know you're a Malaysian parent when you've perfected the 'silent threat' look that can stop your child's misbehavior in its tracks. It's our version of the Death Stare!"],
+            "rating": -0.21863313
+        },
+        {
+            "keyword": "parenting",
+            "joke": ["In Malaysia, bedtime is a suggestion, not a rule. 'Sleep early' means 'stay up until 2 AM watching YouTube', and 'brush your teeth' is optional!"],
+            "rating": -0.22441933
         },
         {
             "keyword": "Elsa",
-            "jokes": [
-                "If Elsa were Malaysian, her signature line wouldn't be 'Let it go.' It'd be 'Let's makan!' – she'd turn the palace into a mamak stall for sure!",
-                "Imagine Elsa trying to find Olaf in Malaysia – she'd be like, 'Olaf, I know you're here somewhere... Oh wait, that's just a melted ice cream cone.'",
-                "Why shouldn’t you give Elsa a balloon? Because she’ll “Let it go”."
-            ]
+            "joke": ["If Elsa were Malaysian, her signature line wouldn't be 'Let it go.' It'd be 'Let's makan!' – she'd turn the palace into a mamak stall for sure!"],
+            "rating": -0.1831391
+        },
+        {
+            "keyword": "Elsa",
+            "joke": ["Imagine Elsa trying to find Olaf in Malaysia – she'd be like, 'Olaf, I know you're here somewhere... Oh wait, that's just a melted ice cream cone.'"],
+            "rating": 0.090486854
+        },
+        {
+            "keyword": "Elsa",
+            "joke": ["Why shouldn’t you give Elsa a balloon? Because she’ll “Let it go”."],
+            "rating": 0.27397606
         },
         {
             "keyword": "education",
-            "jokes": [
-                "In Malaysia, we have three languages: Bahasa Malaysia, English, and 'Math-lish'. Trying to figure out the maths problems in school is like deciphering a secret code!",
-                "You know you're in a Malaysian school when you have more uniforms than weekend outfits. It's like a fashion show sponsored by the Ministry of Education!",
-                "Malaysian schools are the only place where 'recess' feels like a Michelin-star dining experience. All hail the 'nasi lemak' and 'roti canai' stalls!"
-            ]
+            "joke": ["In Malaysia, we have three languages: Bahasa Malaysia, English, and 'Math-lish'. Trying to figure out the maths problems in school is like deciphering a secret code!"],
+            "rating": -0.055867117
+        },
+        {
+            "keyword": "education",
+            "joke": ["You know you're in a Malaysian school when you have more uniforms than weekend outfits. It's like a fashion show sponsored by the Ministry of Education!"],
+            "rating": -0.004246791
+        },
+        {
+            "keyword": "education",
+            "joke": ["Malaysian schools are the only place where 'recess' feels like a Michelin-star dining experience. All hail the 'nasi lemak' and 'roti canai' stalls!"],
+            "rating": -0.6955067
         },
         {
             "keyword": "Monash confession",
-            "jokes": [
-                "Why did the Monash Confession page get a Michelin star? Because it serves up a daily dose of drama and laughter that's worth the hype!",
-                "Aiya, Monash Confession page, it's like a bowl of char kway teow – you never know what you're gonna get, but it's always a bit spicy!",
-                "Why did the Monash Confession page win the 'Most Mysterious Page' award? Because even Scooby-Doo couldn't solve some of those confessions!"
-            ]
+            "joke": ["Why did the Monash Confession page get a Michelin star? Because it serves up a daily dose of drama and laughter that's worth the hype!"],
+            "rating": -0.058005255
+        },
+        {
+            "keyword": "Monash confession",
+            "joke": ["Aiya, Monash Confession page, it's like a bowl of char kway teow – you never know what you're gonna get, but it's always a bit spicy!"],
+            "rating": -0.43368185
+        },
+        {
+            "keyword": "Monash confession",
+            "joke": ["Why did the Monash Confession page win the 'Most Mysterious Page' award? Because even Scooby-Doo couldn't solve some of those confessions!"],
+            "rating": -0.5300879
         }
     ]
-    
 }
