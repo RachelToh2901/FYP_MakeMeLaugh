@@ -148,6 +148,7 @@ def result():
 with open('fixed_jokes.json', 'r', encoding='utf-8') as file:
     data = json.load(file)  
 fixed_jokes = data['fixed_jokes']
+print(fixed_jokes)
 
 @app.route('/participants', methods=['GET','POST'])
 def participants():
@@ -155,23 +156,23 @@ def participants():
     username = session.get('username', None)
     keyword = None
     jokes = None
-    bert_rating = "No need"
+    bert_rating = None
 
     # Check if the user has submitted the ratings form
     if request.method == 'POST' and "submit_button" in request.form:
-        for category in fixed_jokes:
-            jokes = category['jokes']
-            keyword = category['keyword']  # Get the keyword for this category
+        for data in fixed_jokes:
+            joke = data['joke'][0]
+            keyword = data['keyword']  # Get the keyword for this category
+            bert_rating = data['rating']
             
-            for joke in jokes:
-                funny_rating = int(request.form.get(f'rate_{joke}', 0))
-                offensive_rating = int(request.form.get(f'rate_offensive_{joke}', 0))
-                surprise_rating = int(request.form.get(f'rate_surprise_{joke}', 0))
-                reality_rep_value = request.form.get(f'radio_{joke}', 'Yes')
-                reality_rep_rating = 0 if reality_rep_value == 'No' else 1
+            funny_rating = int(request.form.get(f'rate_{joke}', 0))
+            offensive_rating = int(request.form.get(f'rate_offensive_{joke}', 0))
+            surprise_rating = int(request.form.get(f'rate_surprise_{joke}', 0))
+            reality_rep_value = request.form.get(f'radio_{joke}', 'Yes')
+            reality_rep_rating = 0 if reality_rep_value == 'No' else 1
 
-                # Store the ratings in the database, along with the keyword
-                db_joke.insert_joke(joke, keyword, bert_rating, funny_rating, offensive_rating, surprise_rating, reality_rep_rating, username)
+            # Store the ratings in the database, along with the keyword
+            db_joke.insert_joke(joke, keyword, bert_rating, funny_rating, offensive_rating, surprise_rating, reality_rep_rating, username)
 
         return render_template("home.html", confirmation_message="Thank you for your ratings!")
 

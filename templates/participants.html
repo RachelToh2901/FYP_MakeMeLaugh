@@ -264,10 +264,12 @@ body {
     <div class="center-container">
         <div class="center-form">
             <div class="container">
+                <p>Star Ratings (1 - not funny at all, 2 - Not funny, 3 - Neutral, 4 - Little funny, 5 - Very funny)<br>
+                    Kindly ensure that you provide at least 1 star rating for each category (Funny, Offensive & Surprise).</p>
                 <form method="POST" id="fixedForm">
                     <ol>
-                        {% for category in jokes %}
-                            {% for joke in category['jokes'] %}
+                        {% for category in jokes%}
+                            {% for joke in category['joke'] %}
                                 <br><br>
                                 <p><li style="color:black;font-size: 20px;font-family:'Comic Sans MS';"> {{ joke }}</p>
                                 <br><br>

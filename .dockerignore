@@ -1,0 +1,13 @@
+# ignore git and cache and vsc folder
+.git
+.cache
+.vscode
+
+# ignore md files
+*.md
+*.MD
+
+# ignore pycache
+**/*.pyc
+
+MMLwebapp
