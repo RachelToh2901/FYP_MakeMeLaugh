@@ -72,7 +72,7 @@ def delete_user_by_username(username):
 def delete_all_users():
     conn = sqlite3.connect(db_user)
     c = conn.cursor()
-    c.execute("DELETE FROM users")
+    c.execute("DELETE FROM users WHERE username <> 'admin'")
     conn.commit()
     conn.close()
 

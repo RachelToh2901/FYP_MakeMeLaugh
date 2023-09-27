@@ -44,14 +44,14 @@ def signup():
         password = request.form["password"]
         age = request.form["age"]
         gender = request.form["gender"]
-        country = request.form["country"]
+        continent = request.form["continent"]
         fav_comedian = request.form["fav_comedian"]
         personality = request.form["personality"]
         if db_user.get_user_info_by_username(username):
             flash("The username is used")
             return render_template("signup.html")
         else:
-            db_user.create_user(username, password, age, gender, country, fav_comedian, personality)
+            db_user.create_user(username, password, age, gender, continent, fav_comedian, personality)
             return redirect("/login")
     return render_template("signup.html")
 
@@ -106,14 +106,12 @@ def result():
             # Keyword has changed, so generate new jokes
             session['keyword'] = keyword  # Store the new keyword in the session
 
-            _, _, age, gender, country, fav_comedian, _ = db_user.get_user_info_by_username(username)
+            _, _, age, gender, continent, fav_comedian, _ = db_user.get_user_info_by_username(username)
 
             if fav_comedian is None:
-                # prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country}"
-                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}, with a touch of humor inspired by Uncle Roger's style."
+                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {continent}."
             else:
-                # prompt = f"give me 7 jokes about {keyword} for a {age} years old {gender} who stays in {country} using {fav_comedian} style"
-                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {country}, with a touch of humor inspired by {fav_comedian}'s style."
+                prompt = f"Create 7 humorous and relatable jokes about {keyword}, suitable for a {age} years old {gender} in {continent}, with a touch of humor inspired by {fav_comedian}'s style."
 
             # get jokes from gpt
             gen_jokes = chatgpt(prompt)
@@ -148,7 +146,6 @@ def result():
 with open('fixed_jokes.json', 'r', encoding='utf-8') as file:
     data = json.load(file)  
 fixed_jokes = data['fixed_jokes']
-print(fixed_jokes)
 
 @app.route('/participants', methods=['GET','POST'])
 def participants():
