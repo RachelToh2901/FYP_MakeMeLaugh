@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1>User Data</h1>
-    <table>
+    <table id="UserData">
         <tr>
             <th>Username</th>
             <th>Password</th>
@@ -34,6 +34,7 @@
         </tr>
         {% endfor %}
     </table>
+    <button onclick="exportUsersToCSV('users.csv')"> Export to CSV File </button>
     <form method="post" action="{{ url_for('delete_user') }}">
         <input type="text" name="username" placeholder="Enter username to delete"><br>
         <input type="submit" value="Delete User">
@@ -43,9 +44,9 @@
     </form>
 
     <h1>Joke Data</h1>
-    <table>
+    <table id="JokeData">
         <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Joke</th>
             <th>Keyword</th>
             <th>BERT rating</th>
@@ -57,7 +58,7 @@
         </tr>
         {% for joke in jokes %}
         <tr>
-            <td>{{ joke[0] }}</td>
+            <!-- <td>{{ joke[0] }}</td> -->
             <td>{{ joke[1] }}</td>
             <td>{{ joke[2] }}</td>
             <td>{{ joke[3] }}</td>
@@ -70,6 +71,8 @@
         {% endfor %}
     </table>
 
+    <button onclick="exportJokesToCSV('jokes.csv')"> Export to CSV File </button>
+
     <form method="post" action="{{ url_for('delete_all_jokes') }}">
         <input type="submit" value="Delete All Jokes">
     </form>
@@ -77,5 +80,57 @@
     <form method="get" action="{{ url_for('admin_options') }}">
         <input type="submit" value="Back">
     </form>
+
+    <script>  
+        // function to download CSV file  
+        function downloadCSV(csv, filename) {  
+            var csvFile;  
+            var downloadLink;  
+             
+            // define the file type to text/csv  
+            csvFile = new Blob([csv], {type: 'text/csv'});  
+            downloadLink = document.createElement("a");  
+            downloadLink.download = filename;  
+            downloadLink.href = window.URL.createObjectURL(csvFile);  
+            downloadLink.style.display = "none";  
+          
+            document.body.appendChild(downloadLink);  
+            downloadLink.click();  
+        }  
+          
+        // function to export the user data to CSV file format  
+        function exportUsersToCSV(filename) {  
+           //declare a JavaScript variable of array type  
+           var csv = [];  
+           var rows = document.getElementById("UserData").querySelectorAll("table tr");  
+           
+           //merge the whole data in tabular form   
+           for(var i=0; i<rows.length; i++) {  
+            var row = [], cols = rows[i].querySelectorAll("td, th");  
+            for( var j=0; j<cols.length; j++)  
+               row.push(cols[j].innerText);  
+            csv.push(row.join(","));  
+           }   
+           //call the function to download the CSV file  
+           downloadCSV(csv.join("\n"), filename);  
+        }  
+
+        // function to export the user data to CSV file format  
+        function exportJokesToCSV(filename) {  
+           //declare a JavaScript variable of array type  
+           var csv = [];  
+           var rows = document.getElementById("JokeData").querySelectorAll("table tr");  
+           
+           //merge the whole data in tabular form   
+           for(var i=0; i<rows.length; i++) {  
+            var row = [], cols = rows[i].querySelectorAll("td, th");  
+            for( var j=0; j<cols.length; j++)  
+               row.push(cols[j].innerText);  
+            csv.push(row.join(","));  
+           }   
+           //call the function to download the CSV file  
+           downloadCSV(csv.join("\n"), filename);  
+        } 
+    </script>
 </body>
 </html>
