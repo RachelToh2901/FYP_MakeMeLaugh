@@ -13,23 +13,7 @@
 
     <style>
       body {
-        background: linear-gradient(-45deg, #fdf542, #fbc42a,#f6bb19, #ee7752) ;
-      /* linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) ; */
-          /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-          background-size: 400% 400%;
-          animation: gradient 13s ease infinite;
-      }
-
-      @keyframes gradient {
-          0% {
-              background-position: 0% 50%;
-          }
-          50% {
-              background-position: 100% 50%;
-          }
-          100% {
-              background-position: 0% 50%;
-          }
+        background-color: #fbc42a;
       }
 
       /* html {
@@ -79,6 +63,15 @@
         margin:0px;
       }
 
+      h2 {
+        color: white;
+        text-align: center;
+        font-size: 20px; 
+        font-family: "Dosis";      
+        /* text-shadow: 2px 2px 4px #464444; */
+        margin:0px;
+      }
+
       .message{
         display: flow-root;
         justify-content: center;
@@ -108,6 +101,16 @@
         gap: 35px;
         margin-top: 30px;
       }
+
+      .img-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 35px;
+        margin-top: 30px;
+      }
+
       .container2 {
         display: flex;
         flex-direction: column;
@@ -121,7 +124,7 @@
       }
       input {
         font-size:15px;
-        border: 2px dash;
+        border: 2px dash black;
         border-radius: 18px;
         padding: 8px 8px;
         padding-left: 15px;
@@ -182,6 +185,12 @@
         margin: 0 auto;
         max-width: 70%; /* Ensure the image does not exceed the container width */
       }
+
+      marquee {
+        font-size: 15px;
+        font-family: 'Comic Sans MS';
+      }
+
     </style>
   </head>
   <body>
@@ -198,7 +207,12 @@
         <form id="jokeForm" action="{{ url_for('result') }}" method="POST">
           <div class="container">
             <label for="keyword">Enter your keyword:</label>
-            <input type="text" id="keyword" name="keyword"><br><br><br><br>
+            <input type="text" id="keyword" name="keyword">
+            <marquee> Remember to rate the additional jokes section. </marquee>
+            <!-- <div class = "img-container">
+              <img src = "static/board.jpeg"  style="width:140px;height:60px;" >
+            </div> -->
+            <!-- <br><br><br><br> -->
             <input type="submit" value="Generate joke" name= "generateBtn" id="generateBtn">
             <div class="sec-loading">
               <img src="static/rat.gif" alt="loading..."><br><br>
