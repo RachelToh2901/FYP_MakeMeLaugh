@@ -15,45 +15,6 @@
       body {
         background-color: #fbc42a;
       }
-
-      /* html {
-        height:100%;
-      }
-
-      body {
-        margin:0;
-      }
-
-      .bg {
-        animation:slide 3s ease-in-out infinite alternate;
-        background-image: linear-gradient(-60deg, white , #fdf542, orange, #ee7752 50% , #e73c7e 50%, purple);
-        bottom:0;
-        left:-50%;
-        opacity: 0.7;
-        position:fixed;
-        right:-50%;
-        top:0;
-        z-index:-1;
-      }
-
-      .bg2 {
-        animation-direction:alternate-reverse;
-        animation-duration:4s;
-      }
-
-      .bg3 {
-        animation-duration:5s;
-      }
-
-      @keyframes slide {
-        0% {
-          transform:translateX(-25%);
-        }
-        100% {
-          transform:translateX(25%);
-        }
-      } */
-
       h1 {
         color: white;
         text-align: center;
@@ -62,7 +23,6 @@
         /* text-shadow: 2px 2px 4px #464444; */
         margin:0px;
       }
-
       h2 {
         color: white;
         text-align: center;
@@ -151,6 +111,12 @@
         background-image: none;
         color: black;
       }
+      input[type=submit]:disabled {
+        background-color: grey;
+        background-image: none;
+        color: darkgrey;
+        cursor:not-allowed;
+      }
       :root {
         --border-width: 7px;
       }
@@ -164,7 +130,6 @@
         flex-direction: column;
         top: 0;
         left: 0;
-        /* background-color: rgba(255, 255, 255, 0.578); */
         background-color: #fbc42a;
         z-index: 999; /* Ensures the loading symbol appears on top of everything */
         display: none; /* Initially hide it */
@@ -207,13 +172,9 @@
         <form id="jokeForm" action="{{ url_for('result') }}" method="POST">
           <div class="container">
             <label for="keyword">Enter your keyword:</label>
-            <input type="text" id="keyword" name="keyword">
+            <input type="text" id="keyword" name="keyword" onkeyup="checkup()">
             <marquee> Remember to rate the additional jokes section. </marquee>
-            <!-- <div class = "img-container">
-              <img src = "static/board.jpeg"  style="width:140px;height:60px;" >
-            </div> -->
-            <!-- <br><br><br><br> -->
-            <input type="submit" value="Generate joke" name= "generateBtn" id="generateBtn">
+            <input type="submit" value="Generate joke" name= "generateBtn" id="generateBtn" disabled>
             <div class="sec-loading">
               <img src="static/rat.gif" alt="loading..."><br><br>
               <h1>Loading ...</h1>
@@ -242,6 +203,14 @@
         document.querySelector(".sec-loading").style.display = "flex";
         this.submit();
       });
+
+      function checkup() {
+      if(document.getElementById("keyword").value==="") { 
+        document.getElementById("generateBtn").disabled = true; 
+      } else { 
+        document.getElementById("generateBtn").disabled = false;
+      }
+    }
   </script>
   </body>
 </html>
