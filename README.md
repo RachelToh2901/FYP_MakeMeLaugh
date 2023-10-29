@@ -1,4 +1,60 @@
-## Guide to set up and run our web application
+## Guide to use our web application (End User Guide)
+
+This section will provide a step by step guide on how to use the web application. To access to the web app online, they will need to use this ip address http://159.89.201.35/
+
+#### 1. First page - Login/Signup
+
+This is the first page of the web app. Users can choose to login or signup by clicking the button shown. First time users are required to sign up an account first before login. 
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/first_page.png "first_page screenshot")
+
+#### 2. Signup
+
+If users clicked on the ‘Signup’ button in the previous page, they will be led to this signup page. Users need to put in information requested in the sign up page. Once all information is filled up, users need to click on the ‘Signup’ button to sign up this account with the info given. 
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/signup_page.png "signup_page screenshot")
+
+If users found out that they already have an account, users can click on the ‘Login’ text at the bottom to proceed to the login page. 
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/signup_button.png "signup_button screenshot")
+
+#### 3. Login
+
+Users are required to login first. They will need to input their username and password they provided during signup. 
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/login_page.png "login_page screenshot")
+
+If a wrong username or password is given, an error message will pop up at the top of the page, and users need to re-enter their username and password. 
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/login_error_msg.png "login_error_msg screenshot")
+
+#### 4. Enter Keyword
+
+Users can enter a keyword to generate a joke related to the keyword entered. After entering the keyword, users need to press the ‘Generate Joke’ button to get the jokes. If users want to quit from the web app, users can click on the ‘Exit’ button to get back to the first page. 
+
+*(Note: Please ignore the ‘Additional Jokes’ button, that’s for the joke annotation task)*
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/main_wo_keyword.png "main_wo_keyword screenshot")
+
+Users must at least input a word into the black field to generate jokes. 
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/main_with_keyword.png "main_with_keyword screenshot")
+
+#### 5. Rate Jokes
+
+Users will receive 5 jokes related to the keyword entered. Users can give rating to the jokes, rating including the funny level of the joke, offensive level, surprise level, and can they relate the joke to the reality (reality representation). 
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/result_page.png "result_page screenshot")
+
+To submit the feedback/rating, users need to click on the ‘Submit’ button at the bottom of the page. If users want to get other jokes, users can click on the ‘Generate another joke’ button, this will lead the users to the previous page. Else if users want to quit, users can click on the ‘Exit’ button. 
+
+![alt text](https://github.com/TohXiaoYing/MakeMeLaugh/blob/main/images/result_page_buttons.png "result_page_buttons screenshot")
+
+
+___
+
+
+## Guide to set up and run our web application (Technical Guide)
 
 #### 1. Clone project to local repository
 
