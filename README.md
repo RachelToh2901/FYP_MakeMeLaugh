@@ -13,17 +13,15 @@ However, this repo contains some large files. In order to push to GitHub, please
 Virtual environments are very helpful and important for us to install only libraries needed for this project and make sure they don’t mess up with the main one. Besides, it is easier to identify necessary libraries needed for the project by using “pip list” in terminal code.
 
 How to create and activate virtual environment:
-1. Install virtual environment
+1. Install virtual environment - `pip install virtualenv`
 
-2. pip install virtualenv
+2. Create virtual environment **virtualenv [environmentname]** - `virtualenv myenv`
 
-3. Create virtual environment **virtualenv [environmentname]** - `virtualenv myenv`
-
-4. Activate virtual environment **[environmentname]\Scripts\activate**
+3. Activate virtual environment **[environmentname]\Scripts\activate**
     - Windows - `myenv\Scripts\activate`
     - Mac - `source ./myenv/bin/activate`
 
-5. Deactivate virtual environment - `deactivate`
+4. Deactivate virtual environment - `deactivate`
 
 Once activate, you will see your virtual env at the terminal in bracket ().
 If deactivated, the bracket will disappear.
