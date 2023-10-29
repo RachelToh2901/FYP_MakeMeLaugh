@@ -24,6 +24,8 @@ def chatgpt(user_input):
     results = [string.replace("\n", "").replace("\ ", "") for string in results]
     return results
 
+
+
 if __name__ == "__main__":
     import time 
     start = time.time()
