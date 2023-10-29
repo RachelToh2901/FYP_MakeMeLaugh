@@ -8,12 +8,31 @@ model = tf.keras.models.load_model(checkpoint_path)
 
 
 def bert_rating(jokes):
+    '''
+    This function computes BERT-based ratings for a list of jokes.
+
+    Parameters:
+    jokes (list of str): A list of jokes for which ratings are to be computed.
+
+    Returns:
+    ndarray: An array of BERT-based ratings for the input jokes.
+    '''
     df_jokes = pd.DataFrame(np.array(jokes), columns=['joke'])
     preds = make_predictions(model = model,submit_df = df_jokes)
     result_array = np.concatenate([arr.flatten() for arr in preds])
     return result_array
 
 def make_predictions(model, submit_df):
+    '''
+    This function generates predictions using a BERT model for a provided DataFrame.
+
+    Parameters:
+    model: The BERT model used for predictions.
+    submit_df (pd.DataFrame): The DataFrame containing text data for prediction.
+
+    Returns:
+    list: A list of predictions.
+    '''
     submit_data = BertDataGenerator(
         submit_df["joke"].values.astype("str"),
         None,  # Replace with your input mask data if necessary
@@ -29,6 +48,17 @@ def make_predictions(model, submit_df):
     return predictions
 
 def top_5_jokes(a, b):
+    '''
+    This function sorts and returns the top 5 jokes based on a given list of values.
+
+    Parameters:
+    a: The list of jokes.
+    b: The list of values associated with the jokes.
+
+    Returns:
+    list: The top 5 jokes based on the values.
+    list: The corresponding top 5 values.
+    '''
     pairs = list(zip(a, b))
 
     # Sort pairs based on values in b in descending order
@@ -45,6 +75,16 @@ def top_5_jokes(a, b):
 
 
 class BertDataGenerator(tf.keras.utils.Sequence):
+    '''
+    This class implements a data generator for BERT model input data.
+
+    Parameters:
+    full_texts (list of str): The input text data.
+    labels (list of labels): The associated labels (if available).
+    batch_size (int): The batch size for data generation.
+    shuffle (bool): Whether to shuffle the data.
+    include_targets (bool): Whether to include labels as targets in the generator.
+    '''
     def __init__(
         self,
         full_texts,

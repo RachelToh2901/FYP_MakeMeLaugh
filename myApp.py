@@ -8,6 +8,7 @@ import bert_model
 import json
 
 app = Flask(__name__)
+# Set up Flask App Secret key
 app.secret_key = os.getenv("SECRET_KEY")
 
 # Set up the OpenAI API key
@@ -15,14 +16,25 @@ openai.api_key = os.getenv("OPEN_AI_KEY")
 
 @app.route("/")
 def start():
+    '''
+    This function redirects to the "first" page.
+    '''
     return redirect("/first")
 
 @app.route("/first")
 def first():
+    '''
+    This function renders the "first.html" page.
+    '''
     return render_template("first.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    '''
+    Handles user login. If a POST request is received, it validates the user's credentials and redirects to the appropriate page (admin options or home) 
+    based on the username and password. 
+    If a GET request is received, it renders the login page.
+    '''
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -39,6 +51,11 @@ def login():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    '''
+    Manages user registration. If a POST request is received, it processes the user's registration information, 
+    creates a new user in the database, and redirects to the login page. 
+    If a GET request is received, it renders the signup page.
+    '''
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -58,31 +75,50 @@ def signup():
 
 @app.route('/admin_options')
 def admin_options():
+    '''
+    Renders the "admin_options.html" page.
+    '''
     return render_template('admin_options.html')
 
 @app.route('/database')
 def show_users():
+    '''
+    Retrieves user and joke data from the database and renders the "database.html" page.
+    '''
     users = db_user.get_all_user()
     jokes = db_joke.get_all_jokes()
     return render_template('database.html', users=users, jokes=jokes)
 
 @app.route('/delete_user', methods=['POST'])
 def delete_user():
+    '''
+    Deletes a user based on the username provided in a POST request and redirects to the "database" page.
+    '''
     db_user.delete_user_by_username(username = request.form['username'])
     return redirect("/database")
 
 @app.route('/delete_all_users', methods=['POST'])
 def delete_all_users():
+    '''
+    Deletes all users and redirects to the "database" page.
+    '''
     db_user.delete_all_users()
     return redirect("/database")
 
 @app.route('/delete_all_jokes', methods=['POST'])
 def delete_all_jokes():
+    '''
+    Deletes all jokes and redirects to the "database" page.
+    '''
     db_joke.delete_all_jokes()
     return redirect("/database")
 
 @app.route("/home", methods=['GET', 'POST'])
 def home():
+    '''
+     Manages the home page. If a POST request is received, it extracts a keyword and redirects to the "result" page. 
+     If a GET request is received, it renders the "home.html" page.
+    '''
     if request.method == 'POST':
         keyword = request.form["keyword"]
         return redirect(url_for('result', keyword=keyword))
@@ -91,6 +127,12 @@ def home():
 
 @app.route('/result', methods=['GET','POST'])
 def result():
+    '''
+    Handles the results page. 
+    If a POST request is received, it generates jokes, ratings, and processes user ratings for the generated jokes, 
+    then inserts them into the database. 
+    If a GET request is received, it retrieves jokes and ratings from the session and renders the "result.html" page.
+    '''
     # Check if the user is logged in
     username = session.get('username', None)
 
@@ -149,6 +191,11 @@ fixed_jokes = data['fixed_jokes']
 
 @app.route('/participants', methods=['GET','POST'])
 def participants():
+    '''
+    Handles the participants' ratings page. 
+    If a POST request is received, it processes user ratings for fixed jokes and inserts them into the database. 
+    If a GET request is received, it renders the "participants.html" page.
+    '''
     # Check if the user is logged in
     username = session.get('username', None)
     keyword = None
