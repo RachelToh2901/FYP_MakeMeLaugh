@@ -22,13 +22,6 @@
         font-family: "Croissant One";
         margin:0px;
       }
-      h2 {
-        color: white;
-        text-align: center;
-        font-size: 20px; 
-        font-family: "Dosis"; 
-        margin:0px;
-      }
 
       .message{
         display: flow-root;
@@ -36,13 +29,23 @@
         align-items: center;
       }
       .center-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: fit-content;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
       }
       .center-form {
         width: 930px;
+        height: fit-content;
+        margin: 40px 50px;
+        border: none;
+        background-color:white;
+        border-radius: 20px;
+        padding: 30px;
+      }
+      .visualisation {
+        width: 85%;
         height: fit-content;
         margin: 40px 50px;
         border: none;
@@ -55,15 +58,6 @@
         flex-direction: column;
         align-items: left;
         text-align: left;
-        gap: 35px;
-        margin-top: 30px;
-      }
-
-      .img-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
         gap: 35px;
         margin-top: 30px;
       }
@@ -87,9 +81,9 @@
         padding-left: 15px;
       }
       label {
-          font-size:24px;
-          color: rgb(255, 140, 0);
-          font-family: 'Comic Sans MS';
+        font-size:24px;
+        color: rgb(255, 140, 0);
+        font-family: 'Comic Sans MS';
       }
 
       /* For submit button */
@@ -146,8 +140,8 @@
       /* Center the image within the container */
       .left-container img {
         position: fixed;
-        bottom: 0;
-        right: 0;
+        top: 0;
+        left: 0;
         display: block;
         margin: 0 auto;
         max-width: 30%; /* Ensure the image does not exceed the container width */
@@ -162,18 +156,28 @@
       /*The containers that let the graphs in the same row*/
       .same_line {
         display: inline-flex;
+        gap: 80px;
+        margin-left: 100px;
+        margin-right: 100px;
+        max-width: 100%;
       }
       .personality {
         display: inline-flex;
-        cursor: zoom-in;
+        gap: 20px;
+        max-width: 100%;
       }
 
       #two_inline {
-        width: 450px;
+        width: 500px;
+        max-width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
 
       #three_inline {
-        width: 300px;
+        width: 420px;
+        max-width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        cursor: zoom-in;
       }
 
       /* To zoom in and out the personalities graphs */
@@ -182,7 +186,7 @@
       }
 
       input[type=checkbox]:checked ~ label > img {
-        transform: scale(2.0);
+        transform: scale(1.5);
         cursor: zoom-out;
       }
     </style>
@@ -192,16 +196,17 @@
     <div class="message">
       {{ confirmation_message }}
     </div>
-    <h1> </h1>
-    <h1>Make Me Laugh: Jokes Generator</h1>
 
     <!-- Background -->
     <div class="left-container">
-      <img src = "static/dog3.gif" style="width:auto;height:180px;">
+      <img src = "static/dog3.gif" style="width: auto; height: 180px; transform: rotate(180deg);">
     </div>
     
     <!-- The form for enter keyword -->
     <div class="center-container">
+      <br>
+      <h1>Make Me Laugh: Jokes Generator</h1>
+      <br>
       <div class="center-form">
         <form id="jokeForm" action="{{ url_for('result') }}" method="POST">
           <div class="container">
@@ -216,8 +221,6 @@
           </div>
         </form>
         <br>
-
-        <!-- Visualisation -->
         <form method="get" action="{{ url_for('participants') }}">
           <div class="container2">
             <input type="submit" value="Additional Jokes">
@@ -229,23 +232,29 @@
             <input type="submit" value="Exit">
           </div>
         </form>
-        <br><br><br>
+      </div>
+
+      <!-- Visualisation -->
+      <div class="visualisation">
+        <br>
+        <h1 style="color: #fbc42a;">Visualisation</h1>
+        <br><br>
         <div class="same_line">
-          <img id="two_inline" src="static/keyword_frequencies.png"> &emsp;
+          <img id="two_inline" src="static/keyword_frequencies.png">
           <img id="two_inline" src="static/ratings_correlation.png">
         </div>
-        <br><br><br>
+        <br><br><br><br><br>
         <div class="personality">
           <div>
             <input type="checkbox" name="" id="zoom_img_fun">
             <label for="zoom_img_fun">
-              <img id="three_inline" src="static/funny_personality.png"> &emsp;
+              <img id="three_inline" src="static/funny_personality.png">
             </label>
           </div>
           <div>
             <input type="checkbox" name="" id="zoom_img_off">
             <label for="zoom_img_off">
-              <img id="three_inline" src="static/offensive_personality.png"> &emsp;
+              <img id="three_inline" src="static/offensive_personality.png">
             </label>
           </div>
           <div>
@@ -255,9 +264,9 @@
             </label>
           </div>
         </div>
-        
       </div>
     </div>
+
     <script>
       // To show loading symbol when the Generate Joke button is clicked
       document.getElementById("jokeForm").addEventListener("submit", function (event) {
