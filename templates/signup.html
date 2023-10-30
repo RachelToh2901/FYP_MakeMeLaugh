@@ -24,6 +24,7 @@
 
 
     <style>
+      /* For pop up message */
       .flashes {
         align-items:center;
         justify-content: center;
@@ -36,14 +37,13 @@
         margin-left: 25px;
         font-family:'Comic Sans MS';
       }
+
+      /* For background */
       body {
         background: linear-gradient(-45deg, #fdf542, #fbc42a,#f6bb19, #ee7752) ;
-      /* linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) ; */
-          /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-          background-size: 400% 400%;
-          animation: gradient 13s ease infinite;
+        background-size: 400% 400%;
+        animation: gradient 13s ease infinite;
       }
-
       @keyframes gradient {
           0% {
               background-position: 0% 50%;
@@ -55,6 +55,7 @@
               background-position: 0% 50%;
           }
       }
+
       h1 {
         color: white;
         text-align: center;
@@ -97,6 +98,8 @@
           color: rgb(255, 140, 0);
           font-family:'Comic Sans MS' ;
       }
+
+      /* For submit button */
       input[type=submit] {
         text-decoration: none;
         margin: 4px 2px;
@@ -117,7 +120,6 @@
       select{
         border: 4px dash #ee7752;
         font-size:15px;
-        /* border-spacing: 10px;*/
         border-radius: 18px;
         padding: 8px 8px;
         padding-left: 15px;
@@ -144,11 +146,15 @@
 </head>
 <body>
     <h1>Signup Page</h1>
+
+    <!-- Background -->
     <div class="left-container">
       <img src = "static/fish.gif" style="width:450px;height:480px;">
     </div>
+    
     <div class="center-container">
         <div class="center-form">
+          <!-- The form for user to key in their information -->
           <form method="POST" action="{{ url_for('signup') }}">
             <div class="container">
                 <label for="username">Username:</label><br>
@@ -175,7 +181,6 @@
                   <option value="europe">Europe</option>
                   <option value="australia">Australia</option>
                 </select><br><br>
-                <!-- <input type="text" id="country" name="country" required><br><br> -->
                 <label for="Fav_Comedian">Favourite Comedian: (optional)</label><br>
                 <input type="text" id="fav_comedian" name="fav_comedian"><br><br>
                 <label for="personality">MBTI Personality: (optional)</label><br>

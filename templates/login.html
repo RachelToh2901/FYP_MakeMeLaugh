@@ -23,6 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
 
     <style>
+      /* For pop up message */
       .flashes {
         align-items:center;
         justify-content: center;
@@ -36,14 +37,12 @@
         font-family:'Comic Sans MS';
       }
 
+      /* For background */
       body {
         background: linear-gradient(-45deg, #fdf542, #fbc42a,#f6bb19, #ee7752) ;
-      /* linear-gradient(-45deg, #fdf542, #ee7752, #e73c7e, #23a6d5) ; */
-          /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
           background-size: 400% 400%;
           animation: gradient 13s ease infinite;
       }
-
       @keyframes gradient {
           0% {
               background-position: 0% 50%;
@@ -55,8 +54,8 @@
               background-position: 0% 50%;
           }
       }
+
       h1 {
-        /* color: rgb(255, 81, 0); */
         color: White;
         text-align: center;
         font-size: 50px;
@@ -72,8 +71,6 @@
       margin-left: 0px; /* Adjust the margin value as needed */
       }
       .center-form {
-        /* position: fixed;
-        left: 400px; */
         width:500px;
         height: 525px;
         margin: 40px 50px;
@@ -138,17 +135,20 @@
           left: 0;
           display: block;
           margin: 0;
-          max-width: fit-content;/* Ensure the image does not exceed the container width */
+          max-width: fit-content; /* Ensure the image does not exceed the container width */
         }
-
     </style>
 
 </head>
 <body>
     <h1>Login Page</h1>
+
+    <!-- Background -->
     <div class="left-container">
       <img src = "static/kitten.gif" style="width:450px;height:480px;">
     </div>
+
+    <!-- The form for user to key in username and password -->
     <div class="center-container">
       <div class="center-form">
         <form method="POST" action="{{ url_for('login') }}">
